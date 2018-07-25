@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Dailies from './dailies.js';
+import Login from './login.js';
 
-ReactDOM.render(<Dailies />, document.getElementById('root'));
+ReactDOM.render(<Login />, document.getElementById('root'));
