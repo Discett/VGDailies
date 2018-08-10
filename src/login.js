@@ -5,9 +5,12 @@ import './login.css'
 
 
 class Login extends Component {
-
     URL = {
-        url: 'http://127.0.0.1:8000/login/',
+        url: 'http://127.0.0.1:8000/account/login/',
+    };
+
+    Token = {
+        token: '123123312'
     };
 
     state = {
@@ -26,9 +29,20 @@ class Login extends Component {
     handleSubmit = event => {
         event.preventDefault();
         console.log(this.URL.url);
+        /*
         axios.post(this.URL.url, {
             userSubmittedUsername: this.state.userSubmittedUsername,
             userSubmittedPassword: this.state.userSubmittedPassword
+        })
+        */
+        axios({
+            method: 'post',
+            url: this.URL.url,
+            data: {
+                userSubmittedUsername: this.state.userSubmittedUsername,
+                userSubmittedPassword: this.state.userSubmittedPassword,
+            },
+            headers: {'Accept': this.Token.token}
         })
         .then(function (response){
             //okay reponse on accept and fail here
