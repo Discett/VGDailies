@@ -8,6 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from django.conf import settings
+from rest_framework.authtoken.models import Token
 import json
 
 
@@ -21,7 +22,7 @@ def get_auth_token(request):
         body_data = json.loads(body_unicode)
         username = body_data['userSubmittedUsername']
         password = body_data['userSubmittedPassword']
-    #for other general purpose POST requsts.
+    #for other general purpose POST requsts eg. not JSON.
     except:
         username = request.POST.get('userSubmittedUsername')
         password = request.POST.get('userSubmittedPassword')
@@ -32,9 +33,10 @@ def get_auth_token(request):
             request.session['auth'] = token.key
             #!!! before working with redirects fix how you send your post!
             #return redirect('/polls/',request)
-            return HttpResponse(username)
-#    return redirect(settings.LOGIN_URL, request)
-    return HttpResponse(password)
+            return HttpResponse(token)
+    #return redirect(settings.LOGIN_URL, request)
+    #return a redirect instead of a response!
+    return HttpResponse('incorrect username or password')
 
 #These need to set the view in react not django!
 def logout_user(request):
