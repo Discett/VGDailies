@@ -13,6 +13,9 @@ class Index extends Component {
                 <Link href={`/about`}>
                     <a style={{ padding: 5 }}>About Page</a>
                 </Link>
+                <Link href={`/dailytracker`}>
+                    <a style={{ padding: 5 }}>Test Daily Tracker</a>
+                </Link>
             </div>
         )
     }
