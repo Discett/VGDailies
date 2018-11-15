@@ -9,7 +9,7 @@ class DailyTrackerMainPage extends Component {
         return(
             <div>
                 <h1>This is the DailyTrackerMainPage</h1>
-                <DailyDataBox></DailyDataBox>
+                <DailyDataBox showAddButton={true}/>
             </div>
         );
     }
