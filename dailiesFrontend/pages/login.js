@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {credentials} from './credentials';
+import Link from 'next/link';
+
 
 
 class Login extends Component {
@@ -61,7 +63,11 @@ class Login extends Component {
 
     render(){
         return(
+
             <div>
+            <Link href={`/`}>
+                <a style={{ padding: 5 }}>Log in</a>
+            </Link>
                 <form className='auth_form' onSubmit={this.handleSubmit}>
                     Please enter your user name<br></br>
                     <input type='text' name='username' onChange={this.handleChangeUser}></input> <br></br>

@@ -14,20 +14,59 @@ import Modal from 'react-modal';
 //TODO: specific games would need their own class to display data in DailyDataBox
 
 
-
-//TODO: what does setAppElement do?
-//Modal.setAppElement('#root');
-
 const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
+    content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : 'auto',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)',
+        height                : '500px',
+        overflow              : 'auto'
+      }
 };
+
+//Modal.setAppElement(el)
+
+//needs to display that and handle delete button
+//needs more css to move button to the right
+class ModalRow extends Component {
+    render(){
+        const data = this.props.data;
+        const title = data.title;
+        return(
+            <div>
+                <h1>{title}</h1>
+                <button>remove</button>
+            </div>
+        );
+    }
+}
+//query database for info add to row and loop
+class ModalContainer extends Component {
+    constructor(){
+        super();
+    }
+
+    state = {
+        rows:[]
+    }
+
+    componentDidMount(){
+        this.setState({rows:DATA});
+    }
+
+    render(){
+        const display = [];
+        this.state.rows.forEach((row)=>{
+            display.push(<ModalRow data={row} key={row.title}/>);
+        });
+        return(
+            <div>{display}</div>
+        );
+    }
+}
 
 class DailyRow extends Component{
     render(){
@@ -44,7 +83,6 @@ class DailyRow extends Component{
 }
 
 class AddDailyInformation extends Component {
-
     constructor(){
         super();
         this.state = {
@@ -54,6 +92,10 @@ class AddDailyInformation extends Component {
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     };
+
+    componentWillMount(){
+        Modal.setAppElement('body');
+    }
 
     openModal(){
         this.setState({modalIsOpen:true});
@@ -84,6 +126,9 @@ class AddDailyInformation extends Component {
                 >
                     <h2 ref={subtitle => this.subtitle = subtitle}>Add Game Daily</h2>
                       <button onClick={this.closeModal}>close</button>
+                      <div>
+                        <ModalContainer/>
+                      </div>
                       <div>Please input daily name and time of reset</div>
                       <form>
                         <input />

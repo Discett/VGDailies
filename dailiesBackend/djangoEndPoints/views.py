@@ -11,10 +11,8 @@ from django.conf import settings
 from rest_framework.authtoken.models import Token
 import json
 
-
-
 @csrf_exempt
-#gotta work on this one a bit
+#python works by spacing not brackets
 def get_auth_token(request):
     #this is because AXIOS sends request in as default in JSON so we need to decode
     try:
@@ -38,9 +36,28 @@ def get_auth_token(request):
     #return a redirect instead of a response!
     return HttpResponse('incorrect username or password')
 
-#These need to set the view in react not django!
 def logout_user(request):
-    return render(request, 'account/logout.html', {})
+    return render(request, 'account/logout.html',{})
 
 def login_form(request):
-    return render(request, 'account/login.html', {})
+    return render(request, 'account/login.html',{})
+
+def addUserDaily(request):
+    return HttpResponse("add")
+
+def removeUserDaily(response):
+    return HttpResponse("remove")
+
+@csrf_exempt
+def getUserDailies(request):
+    try:
+        body_unicode = request.body.decode('utf-8')
+        body_data = json.loads(body_unicode)
+        username = body_data['username']
+        token = body_data['token']
+    except:
+        username = request.POST.get('username')
+        token = request.POST.get('token')
+    if token and username is not None:
+        return HttpResponse('yes')
+    return HttpResponse('no')
