@@ -4,12 +4,16 @@ from rest_framework import viewsets
 from django.views import generic
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
-#from djangoEndPoints.serializers import UserSerializer
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from django.conf import settings
 from rest_framework.authtoken.models import Token
 import json
+from rest_framework.renderers import JSONRenderer
+from django.core import serializers
+#from djangoEndPoints.serializers import DailiesSerializer
+from djangoEndPoints.models import dailies
 
 @csrf_exempt
 #python works by spacing not brackets
@@ -59,5 +63,14 @@ def getUserDailies(request):
         username = request.POST.get('username')
         token = request.POST.get('token')
     if token and username is not None:
-        return HttpResponse('yes')
-    return HttpResponse('no')
+        try:
+            userObject = User.objects.get(username=username)
+            tokenObject  = Token.objects.get(key=token)
+        except:
+            return HttpResponse('error with authentication')
+        if tokenObject.user_id == userObject.id:
+            dailiesObject = dailies.objects.filter(userid = tokenObject.user_id)
+            data = serializers.serialize('json',dailiesObject, fields = ('title','reset'))
+            return JsonResponse(data, safe=False)
+        return HttpResponse('error with authentication')
+    return HttpResponse('error with authentication')

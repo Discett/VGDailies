@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
+from djangoEndPoints.models import dailies
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class DailiesSerializer(serializers.Serializer):
     class Meta:
-        model = User
-        fields = ('url', 'username', 'password', 'email')
+        model = dailies
+        fields = ('title','reset')
