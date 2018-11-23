@@ -33,11 +33,7 @@ def get_auth_token(request):
         if user.is_active:
             token, created = Token.objects.get_or_create(user=user)
             request.session['auth'] = token.key
-            #!!! before working with redirects fix how you send your post!
-            #return redirect('/polls/',request)
             return HttpResponse(token)
-    #return redirect(settings.LOGIN_URL, request)
-    #return a redirect instead of a response!
     return HttpResponse('incorrect username or password')
 
 def logout_user(request):
@@ -46,11 +42,63 @@ def logout_user(request):
 def login_form(request):
     return render(request, 'account/login.html',{})
 
+@csrf_exempt
 def addUserDaily(request):
-    return HttpResponse("add")
+    #try to get information from json from website
+    try:
+        body_unicode = request.body.decode('utf-8')
+        body_data = json.loads(body_unicode)
+        username = body_data['username']
+        token = body_data['token']
+        title = body_data['title']
+        reset = body_data['reset']
+    #this is for testing purposes
+    except:
+        username = request.POST.get('username')
+        token = request.POST.get('token')
+        title = request.POST.get('title')
+        reset = request.POST.get('reset')
+    #if it these fields are not empty then check authentication
+    if token and username is not None:
+        try:
+            userObject = User.objects.get(username=username)
+            tokenObject  = Token.objects.get(key=token)
+        except:
+            return HttpResponse('error with authentication')
+        #checks auth
+        if tokenObject.user_id == userObject.id:
+            #checks if title already exists for user
+            if dailies.objects.filter(userid = tokenObject.user_id).filter(title = title).exists():
+                return HttpResponse('exists')
+            add = dailies(userid = userObject.id, title = title, reset = reset)
+            add.save()
+            return HttpResponse('add')
+        return HttpResponse('error with authentication')
+    return HttpResponse('error with authentication')
 
-def removeUserDaily(response):
-    return HttpResponse("remove")
+@csrf_exempt
+def removeUserDaily(request):
+    try:
+        body_unicode = request.body.decode('utf-8')
+        body_data = json.loads(body_unicode)
+        username = body_data['username']
+        token = body_data['token']
+        title = body_data['title']
+    except:
+        username = request.POST.get('username')
+        token = request.POST.get('token')
+        title = request.POST.get('title')
+    if token and username is not None:
+        try:
+            userObject = User.objects.get(username=username)
+            tokenObject  = Token.objects.get(key=token)
+        except:
+            return HttpResponse('error with authentication')
+        if tokenObject.user_id == userObject.id:
+            dailies.objects.filter(userid = tokenObject.user_id).filter(title = title).delete()
+            return HttpResponse('remove')
+        return HttpResponse('error with authentication')
+    return HttpResponse('error with authentication')
 
 @csrf_exempt
 def getUserDailies(request):
