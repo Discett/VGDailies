@@ -50,6 +50,7 @@ class JStest extends Component {
     componentDidMount(){
         axios.get(GW2DAILYURL)
         .then(res => {
+            console.log(res);
             const fractalData = res.data.fractals;
             this.setState({fractalData});
         });

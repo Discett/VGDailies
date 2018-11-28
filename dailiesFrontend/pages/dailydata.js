@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import {credentials} from './credentials';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
+import {weblinks} from './weblinks';
+import axios from 'axios';
+
 //import dailydatastyles from './styles/dailydatastyles.css'
 
 //DailyData: will contain the data for the user's dailies
@@ -54,13 +57,13 @@ class ModalContainer extends Component {
     }
 
     componentDidMount(){
-        this.setState({rows:DATA});
+        this.setState({rows:this.props.data});
     }
 
     render(){
         const display = [];
         this.state.rows.forEach((row)=>{
-            display.push(<ModalRow data={row} key={row.title}/>);
+            display.push(<ModalRow data={row.fields} key={row.fields.title}/>);
         });
         return(
             <div>{display}</div>
@@ -126,15 +129,15 @@ class AddDailyInformation extends Component {
                 >
                     <h2 ref={subtitle => this.subtitle = subtitle}>Add Game Daily</h2>
                       <button onClick={this.closeModal}>close</button>
-                      <div>
-                        <ModalContainer/>
-                      </div>
                       <div>Please input daily name and time of reset</div>
                       <form>
                         <input />
                         <input type="time"/>
                         <button>submit</button>
                       </form>
+                      <div>
+                        <ModalContainer data={this.props.data}/>
+                      </div>
                 </Modal>
             </div>
         );
@@ -148,10 +151,14 @@ AddDailyInformation.defaultProps = {
 class DailyInformation extends Component {
     render(){
         const rows = [];
+        console.log("dailyInformation");
+        //console.log(this.props.data);
+        //TODO: fix response from database
         this.props.data.forEach((data)=>{
             rows.push(
-                <DailyRow data={data} key={data.title}/>
+                <DailyRow data={data.fields} key={data.fields.title}/>
             );
+            console.log(data.fields.title);
         })
         return(
             <table>
@@ -168,16 +175,45 @@ class DailyInformation extends Component {
 }
 
 class DailyDataBox extends Component {
+    state = {
+        dailyData:[]
+    }
+
+    componentDidMount(){
+        axios({
+            method: 'post',
+            url: weblinks.link.getDailies,
+            data: {
+                username: credentials.user.username,
+                token: credentials.user.token,
+            },
+        })
+        .then(function (response){
+            //okay reponse on accept and fail here
+            //console.log(response);
+            if(response.data != "incorrect username or password"){
+                this.setState({dailyData:response.data});
+            }
+        }.bind(this))
+        .catch(function (error){
+            //if error do just clear fields and display mismatch user or password
+            console.log(error);
+        });
+    }
+
     render(){
+        console.log("token");
+        console.log(credentials.user.token);
+        console.log(this.state.dailyData);
         return(
             <div>
-                <DailyInformation data={DATA} />
-                <AddDailyInformation showAddButton={this.props.showAddButton}/>
+                <DailyInformation data={this.state.dailyData} />
+                <AddDailyInformation showAddButton={this.props.showAddButton} data={this.state.dailyData}/>
             </div>
         );
     }
 }
-
+/*
 const DATA = [
     {title: 'Overwatch', date: new Date(), time_to_reset: 5, dailies_completed: false},
     {title: 'GW2', date: new Date(), time_to_reset: 5, dailies_completed: false},
@@ -185,5 +221,5 @@ const DATA = [
     {title: 'Dragalia', date: new Date(), time_to_reset: 5, dailies_completed: false},
     {title: 'Spooky\'s House', date: new Date(), time_to_reset: 5, dailies_completed: false}
 ];
-
+*/
 export default DailyDataBox;

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {credentials} from './credentials';
 import Link from 'next/link';
-
-
+import Router from 'next/router';
 
 class Login extends Component {
     // we can put URL into credentials, probably should do this if app gets more complex
@@ -53,6 +52,7 @@ class Login extends Component {
                 <credentialsContext>
                     {credentials.user.token = response.data}
                 </credentialsContext>
+                Router.push('/dailytracker')
             }
         })
         .catch(function (error){

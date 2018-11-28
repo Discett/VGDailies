@@ -119,6 +119,8 @@ def getUserDailies(request):
         if tokenObject.user_id == userObject.id:
             dailiesObject = dailies.objects.filter(userid = tokenObject.user_id)
             data = serializers.serialize('json',dailiesObject, fields = ('title','reset'))
-            return JsonResponse(data, safe=False)
+            #return JsonResponse(json.dumps(data, ensure_ascii=False), safe=False)
+            #return JsonResponse(data, safe=False)
+            return HttpResponse(data, content_type="application/json")
         return HttpResponse('error with authentication')
     return HttpResponse('error with authentication')
