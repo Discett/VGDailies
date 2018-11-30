@@ -118,9 +118,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
  //import axios from 'axios';
 
@@ -156,13 +156,38 @@ var ModalRow =
 function (_Component) {
   _inherits(ModalRow, _Component);
 
-  function ModalRow() {
+  function ModalRow(props) {
+    var _this;
+
     _classCallCheck(this, ModalRow);
 
-    return _possibleConstructorReturn(this, (ModalRow.__proto__ || Object.getPrototypeOf(ModalRow)).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, (ModalRow.__proto__ || Object.getPrototypeOf(ModalRow)).call(this, props));
+    _this.handleRemove = _this.handleRemove.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(ModalRow, [{
+    key: "handleRemove",
+    value: function handleRemove(e) {
+      console.log('Remove');
+      __WEBPACK_IMPORTED_MODULE_5_axios___default()({
+        method: 'post',
+        url: __WEBPACK_IMPORTED_MODULE_4__weblinks__["a" /* weblinks */].link.removeDailies,
+        data: {
+          username: __WEBPACK_IMPORTED_MODULE_1__credentials__["a" /* credentials */].user.username,
+          token: __WEBPACK_IMPORTED_MODULE_1__credentials__["a" /* credentials */].user.token,
+          title: this.props.data.title
+        }
+      }).then(function (response) {
+        //update UI
+        //forceupdate component
+        this.props.updateRemove(this.props.data.title);
+        console.log(response);
+      }.bind(this)).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var data = this.props.data;
@@ -170,17 +195,18 @@ function (_Component) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 42
+          lineNumber: 70
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 43
+          lineNumber: 71
         }
       }, title), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
+        onClick: this.handleRemove,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 44
+          lineNumber: 72
         }
       }, "remove"));
     }
@@ -196,20 +222,25 @@ function (_Component2) {
   _inherits(ModalContainer, _Component2);
 
   function ModalContainer() {
-    var _this;
+    var _ref;
+
+    var _temp, _this2;
 
     _classCallCheck(this, ModalContainer);
 
-    _this = _possibleConstructorReturn(this, (ModalContainer.__proto__ || Object.getPrototypeOf(ModalContainer)).call(this));
-    Object.defineProperty(_assertThisInitialized(_this), "state", {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _possibleConstructorReturn(_this2, (_temp = _this2 = _possibleConstructorReturn(this, (_ref = ModalContainer.__proto__ || Object.getPrototypeOf(ModalContainer)).call.apply(_ref, [this].concat(args))), Object.defineProperty(_assertThisInitialized(_this2), "state", {
       configurable: true,
       enumerable: true,
       writable: true,
       value: {
-        rows: []
+        rows: [] //this is before render
+
       }
-    });
-    return _this;
+    }), _temp));
   }
 
   _createClass(ModalContainer, [{
@@ -222,21 +253,24 @@ function (_Component2) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var display = [];
       this.state.rows.forEach(function (row) {
         display.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ModalRow, {
           data: row.fields,
           key: row.fields.title,
+          updateRemove: _this3.props.updateRemove,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 66
+            lineNumber: 89
           }
         }));
       });
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 69
+          lineNumber: 92
         }
       }, display);
     }
@@ -264,17 +298,17 @@ function (_Component3) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 80
+          lineNumber: 103
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 81
+          lineNumber: 104
         }
       }, title), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 82
+          lineNumber: 105
         }
       }, data.time_to_reset));
     }
@@ -289,18 +323,23 @@ function (_Component4) {
   _inherits(AddDailyInformation, _Component4);
 
   function AddDailyInformation() {
-    var _this2;
+    var _this4;
 
     _classCallCheck(this, AddDailyInformation);
 
-    _this2 = _possibleConstructorReturn(this, (AddDailyInformation.__proto__ || Object.getPrototypeOf(AddDailyInformation)).call(this));
-    _this2.state = {
-      modalIsOpen: false
+    _this4 = _possibleConstructorReturn(this, (AddDailyInformation.__proto__ || Object.getPrototypeOf(AddDailyInformation)).call(this));
+    _this4.state = {
+      modalIsOpen: false,
+      title: '',
+      time: ''
     };
-    _this2.openModal = _this2.openModal.bind(_assertThisInitialized(_this2));
-    _this2.afterOpenModal = _this2.afterOpenModal.bind(_assertThisInitialized(_this2));
-    _this2.closeModal = _this2.closeModal.bind(_assertThisInitialized(_this2));
-    return _this2;
+    _this4.openModal = _this4.openModal.bind(_assertThisInitialized(_this4));
+    _this4.afterOpenModal = _this4.afterOpenModal.bind(_assertThisInitialized(_this4));
+    _this4.closeModal = _this4.closeModal.bind(_assertThisInitialized(_this4));
+    _this4.handleSubmit = _this4.handleSubmit.bind(_assertThisInitialized(_this4));
+    _this4.handleTimeChange = _this4.handleTimeChange.bind(_assertThisInitialized(_this4));
+    _this4.handleTitleChange = _this4.handleTitleChange.bind(_assertThisInitialized(_this4));
+    return _this4;
   }
 
   _createClass(AddDailyInformation, [{
@@ -326,12 +365,51 @@ function (_Component4) {
     key: "afterOpenModal",
     value: function afterOpenModal() {
       this.subtitle.style.color = '#f00';
-    } //TODO: Modal submit needs to add to games in backend
+    }
+  }, {
+    key: "handleTimeChange",
+    value: function handleTimeChange(e) {
+      this.setState({
+        time: e.target.value
+      });
+    }
+  }, {
+    key: "handleTitleChange",
+    value: function handleTitleChange(e) {
+      this.setState({
+        title: e.target.value
+      });
+      console.log(this.state.title);
+    } //TODO: fix bug with remove being improper
 
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      console.log("info submitted");
+      console.log(this.state.title);
+      console.log(this.state.time);
+      __WEBPACK_IMPORTED_MODULE_5_axios___default()({
+        method: 'post',
+        url: __WEBPACK_IMPORTED_MODULE_4__weblinks__["a" /* weblinks */].link.addDailies,
+        data: {
+          username: __WEBPACK_IMPORTED_MODULE_1__credentials__["a" /* credentials */].user.username,
+          token: __WEBPACK_IMPORTED_MODULE_1__credentials__["a" /* credentials */].user.token,
+          title: this.state.title,
+          resetTime: this.state.time
+        }
+      }).then(function (response) {
+        console.log('success');
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      }); //TODO: needs to reference time and data to backend
+
+      this.closeModal();
+    }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this5 = this;
 
       var button;
 
@@ -341,7 +419,7 @@ function (_Component4) {
           onClick: this.openModal,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 118
+            lineNumber: 179
           }
         }, "Click to edit dailies");
       }
@@ -349,12 +427,12 @@ function (_Component4) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 121
+          lineNumber: 182
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 122
+          lineNumber: 183
         }
       }, button), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_modal___default.a, {
         isOpen: this.state.modalIsOpen,
@@ -364,58 +442,62 @@ function (_Component4) {
         contentLabel: "Modify daily menu",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 123
+          lineNumber: 184
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h2", {
         ref: function ref(subtitle) {
-          return _this3.subtitle = subtitle;
+          return _this5.subtitle = subtitle;
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 130
+          lineNumber: 191
         }
       }, "Add Game Daily"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
         onClick: this.closeModal,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 131
+          lineNumber: 192
         }
       }, "close"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 132
+          lineNumber: 193
         }
-      }, "Please input daily name and time of reset"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("form", {
+      }, "Please input daily name and time of reset"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+        type: "text",
+        name: "title",
+        onChange: this.handleTitleChange,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 133
-        }
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 134
+          lineNumber: 194
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
         type: "time",
+        name: "time",
+        onChange: this.handleTimeChange,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 135
+          lineNumber: 195
         }
-      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+        type: "submit",
+        value: "submit",
+        onClick: this.handleSubmit,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 136
+          lineNumber: 196
         }
-      }, "submit")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 138
+          lineNumber: 197
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ModalContainer, {
         data: this.props.data,
+        updateRemove: this.props.updateRemove,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 139
+          lineNumber: 198
         }
       }))));
     }
@@ -444,7 +526,6 @@ function (_Component5) {
     value: function render() {
       var rows = [];
       console.log("dailyInformation"); //console.log(this.props.data);
-      //TODO: fix response from database
 
       this.props.data.forEach(function (data) {
         rows.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(DailyRow, {
@@ -452,7 +533,7 @@ function (_Component5) {
           key: data.fields.title,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 159
+            lineNumber: 217
           }
         }));
         console.log(data.fields.title);
@@ -460,32 +541,32 @@ function (_Component5) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 164
+          lineNumber: 222
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("thread", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 165
+          lineNumber: 223
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 166
+          lineNumber: 224
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 167
+          lineNumber: 225
         }
       }, "Title"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 168
+          lineNumber: 226
         }
       }, "Is completed"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tbody", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 171
+          lineNumber: 229
         }
       }, rows));
     }
@@ -499,25 +580,22 @@ var DailyDataBox =
 function (_Component6) {
   _inherits(DailyDataBox, _Component6);
 
-  function DailyDataBox() {
-    var _ref;
-
-    var _temp, _this4;
+  function DailyDataBox(props) {
+    var _this6;
 
     _classCallCheck(this, DailyDataBox);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _possibleConstructorReturn(_this4, (_temp = _this4 = _possibleConstructorReturn(this, (_ref = DailyDataBox.__proto__ || Object.getPrototypeOf(DailyDataBox)).call.apply(_ref, [this].concat(args))), Object.defineProperty(_assertThisInitialized(_this4), "state", {
+    _this6 = _possibleConstructorReturn(this, (DailyDataBox.__proto__ || Object.getPrototypeOf(DailyDataBox)).call(this, props));
+    Object.defineProperty(_assertThisInitialized(_this6), "state", {
       configurable: true,
       enumerable: true,
       writable: true,
       value: {
         dailyData: []
       }
-    }), _temp));
+    });
+    _this6.updateRemove = _this6.updateRemove.bind(_assertThisInitialized(_this6));
+    return _this6;
   }
 
   _createClass(DailyDataBox, [{
@@ -542,30 +620,46 @@ function (_Component6) {
         //if error do just clear fields and display mismatch user or password
         console.log(error);
       });
+    } //TODO: a bug with update remove when clicked too fast it sometimes doesn't register
+
+  }, {
+    key: "updateRemove",
+    value: function updateRemove(removed) {
+      for (var i = 0; i < this.state.dailyData.length; i++) {
+        console.log(this.state.dailyData[i].fields.title);
+
+        if (removed == this.state.dailyData[i].fields.title) {
+          delete this.state.dailyData[i];
+          this.setState({
+            dailyData: this.state.dailyData
+          });
+        }
+      }
     }
   }, {
     key: "render",
     value: function render() {
-      console.log("token");
-      console.log(__WEBPACK_IMPORTED_MODULE_1__credentials__["a" /* credentials */].user.token);
-      console.log(this.state.dailyData);
+      //console.log("token");
+      //console.log(credentials.user.token);
+      //console.log(this.state.dailyData);
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 209
+          lineNumber: 282
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(DailyInformation, {
         data: this.state.dailyData,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 210
+          lineNumber: 283
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(AddDailyInformation, {
         showAddButton: this.props.showAddButton,
         data: this.state.dailyData,
+        updateRemove: this.updateRemove,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 211
+          lineNumber: 284
         }
       }));
     }
@@ -573,16 +667,6 @@ function (_Component6) {
 
   return DailyDataBox;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
-/*
-const DATA = [
-    {title: 'Overwatch', date: new Date(), time_to_reset: 5, dailies_completed: false},
-    {title: 'GW2', date: new Date(), time_to_reset: 5, dailies_completed: false},
-    {title: 'TF2', date: new Date(), time_to_reset: 5, dailies_completed: false},
-    {title: 'Dragalia', date: new Date(), time_to_reset: 5, dailies_completed: false},
-    {title: 'Spooky\'s House', date: new Date(), time_to_reset: 5, dailies_completed: false}
-];
-*/
-
 
 /* harmony default export */ __webpack_exports__["a"] = (DailyDataBox);
 

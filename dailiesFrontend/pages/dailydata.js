@@ -35,35 +35,58 @@ const customStyles = {
 //needs to display that and handle delete button
 //needs more css to move button to the right
 class ModalRow extends Component {
+
+    constructor(props){
+        super(props);
+        this.handleRemove = this.handleRemove.bind(this);
+    }
+
+    handleRemove(e){
+        console.log('Remove');
+        axios({
+            method: 'post',
+            url: weblinks.link.removeDailies,
+            data: {
+                username:   credentials.user.username,
+                token:      credentials.user.token,
+                title:      this.props.data.title,
+            },
+        })
+        .then(function (response){
+            //update UI
+            //forceupdate component
+            this.props.updateRemove(this.props.data.title);
+            console.log(response);
+        }.bind(this))
+        .catch(function (error){
+            console.log(error);
+        });
+    }
+
     render(){
         const data = this.props.data;
         const title = data.title;
         return(
             <div>
                 <h1>{title}</h1>
-                <button>remove</button>
+                <button onClick={this.handleRemove}>remove</button>
             </div>
         );
     }
 }
 //query database for info add to row and loop
 class ModalContainer extends Component {
-    constructor(){
-        super();
-    }
-
     state = {
         rows:[]
     }
-
+    //this is before render
     componentDidMount(){
         this.setState({rows:this.props.data});
     }
-
     render(){
         const display = [];
         this.state.rows.forEach((row)=>{
-            display.push(<ModalRow data={row.fields} key={row.fields.title}/>);
+            display.push(<ModalRow data={row.fields} key={row.fields.title} updateRemove={this.props.updateRemove}/>);
         });
         return(
             <div>{display}</div>
@@ -89,11 +112,16 @@ class AddDailyInformation extends Component {
     constructor(){
         super();
         this.state = {
-            modalIsOpen: false
+            modalIsOpen: false,
+            title:'',
+            time:'',
         };
-        this.openModal = this.openModal.bind(this);
-        this.afterOpenModal = this.afterOpenModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
+        this.openModal          = this.openModal.bind(this);
+        this.afterOpenModal     = this.afterOpenModal.bind(this);
+        this.closeModal         = this.closeModal.bind(this);
+        this.handleSubmit       = this.handleSubmit.bind(this);
+        this.handleTimeChange   = this.handleTimeChange.bind(this);
+        this.handleTitleChange  = this.handleTitleChange.bind(this);
     };
 
     componentWillMount(){
@@ -111,7 +139,40 @@ class AddDailyInformation extends Component {
     afterOpenModal(){
         this.subtitle.style.color = '#f00';
     }
-//TODO: Modal submit needs to add to games in backend
+
+    handleTimeChange(e){
+        this.setState({time: e.target.value});
+    }
+
+    handleTitleChange(e){
+        this.setState({title: e.target.value});
+        console.log(this.state.title);
+    }
+//TODO: fix bug with remove being improper
+    handleSubmit(e){
+        console.log("info submitted");
+        console.log(this.state.title);
+        console.log(this.state.time);
+        axios({
+            method: 'post',
+            url: weblinks.link.addDailies,
+            data: {
+                username:       credentials.user.username,
+                token:          credentials.user.token,
+                title:          this.state.title,
+                resetTime:      this.state.time,
+            },
+        })
+        .then(function (response){
+            console.log('success');
+            console.log(response);
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+        //TODO: needs to reference time and data to backend
+        this.closeModal();
+    }
     render(){
         let button;
         if(this.props.showAddButton){
@@ -130,13 +191,11 @@ class AddDailyInformation extends Component {
                     <h2 ref={subtitle => this.subtitle = subtitle}>Add Game Daily</h2>
                       <button onClick={this.closeModal}>close</button>
                       <div>Please input daily name and time of reset</div>
-                      <form>
-                        <input />
-                        <input type="time"/>
-                        <button>submit</button>
-                      </form>
+                        <input type='text' name='title' onChange={this.handleTitleChange}/>
+                        <input type="time" name='time'onChange={this.handleTimeChange}/>
+                        <input type='submit' value='submit' onClick={this.handleSubmit}/>
                       <div>
-                        <ModalContainer data={this.props.data}/>
+                        <ModalContainer data={this.props.data} updateRemove={this.props.updateRemove}/>
                       </div>
                 </Modal>
             </div>
@@ -153,7 +212,6 @@ class DailyInformation extends Component {
         const rows = [];
         console.log("dailyInformation");
         //console.log(this.props.data);
-        //TODO: fix response from database
         this.props.data.forEach((data)=>{
             rows.push(
                 <DailyRow data={data.fields} key={data.fields.title}/>
@@ -175,6 +233,11 @@ class DailyInformation extends Component {
 }
 
 class DailyDataBox extends Component {
+    constructor(props){
+        super(props);
+        this.updateRemove         = this.updateRemove.bind(this);
+    }
+
     state = {
         dailyData:[]
     }
@@ -200,26 +263,28 @@ class DailyDataBox extends Component {
             console.log(error);
         });
     }
+//TODO: a bug with update remove when clicked too fast it sometimes doesn't register
+    updateRemove(removed){
+        for(let i = 0; i < this.state.dailyData.length; i++){
+            console.log(this.state.dailyData[i].fields.title);
+            if(removed == this.state.dailyData[i].fields.title){
+                delete this.state.dailyData[i];
+                this.setState({dailyData: this.state.dailyData});
+            }
+        }
+    }
 
     render(){
-        console.log("token");
-        console.log(credentials.user.token);
-        console.log(this.state.dailyData);
+        //console.log("token");
+        //console.log(credentials.user.token);
+        //console.log(this.state.dailyData);
         return(
             <div>
-                <DailyInformation data={this.state.dailyData} />
-                <AddDailyInformation showAddButton={this.props.showAddButton} data={this.state.dailyData}/>
+                <DailyInformation data={this.state.dailyData}/>
+                <AddDailyInformation showAddButton={this.props.showAddButton} data={this.state.dailyData} updateRemove={this.updateRemove}/>
             </div>
         );
     }
 }
-/*
-const DATA = [
-    {title: 'Overwatch', date: new Date(), time_to_reset: 5, dailies_completed: false},
-    {title: 'GW2', date: new Date(), time_to_reset: 5, dailies_completed: false},
-    {title: 'TF2', date: new Date(), time_to_reset: 5, dailies_completed: false},
-    {title: 'Dragalia', date: new Date(), time_to_reset: 5, dailies_completed: false},
-    {title: 'Spooky\'s House', date: new Date(), time_to_reset: 5, dailies_completed: false}
-];
-*/
+
 export default DailyDataBox;

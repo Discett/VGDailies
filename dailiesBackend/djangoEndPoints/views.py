@@ -49,15 +49,15 @@ def addUserDaily(request):
         body_unicode = request.body.decode('utf-8')
         body_data = json.loads(body_unicode)
         username = body_data['username']
-        token = body_data['token']
-        title = body_data['title']
-        reset = body_data['reset']
+        token =     body_data['token']
+        title =     body_data['title']
+        resetTime = body_data['resetTime']
     #this is for testing purposes
     except:
-        username = request.POST.get('username')
-        token = request.POST.get('token')
-        title = request.POST.get('title')
-        reset = request.POST.get('reset')
+        username    = request.POST.get('username')
+        token       = request.POST.get('token')
+        title       = request.POST.get('title')
+        resetTime   = request.POST.get('resetTime')
     #if it these fields are not empty then check authentication
     if token and username is not None:
         try:
@@ -70,7 +70,7 @@ def addUserDaily(request):
             #checks if title already exists for user
             if dailies.objects.filter(userid = tokenObject.user_id).filter(title = title).exists():
                 return HttpResponse('exists')
-            add = dailies(userid = userObject.id, title = title, reset = reset)
+            add = dailies(userid = userObject.id, title = title, resetTime = resetTime)
             add.save()
             return HttpResponse('add')
         return HttpResponse('error with authentication')
@@ -118,7 +118,7 @@ def getUserDailies(request):
             return HttpResponse('error with authentication')
         if tokenObject.user_id == userObject.id:
             dailiesObject = dailies.objects.filter(userid = tokenObject.user_id)
-            data = serializers.serialize('json',dailiesObject, fields = ('title','reset'))
+            data = serializers.serialize('json',dailiesObject, fields = ('title','reset','resetTime'))
             #return JsonResponse(json.dumps(data, ensure_ascii=False), safe=False)
             #return JsonResponse(data, safe=False)
             return HttpResponse(data, content_type="application/json")
