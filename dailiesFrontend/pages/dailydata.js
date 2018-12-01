@@ -16,7 +16,8 @@ import axios from 'axios';
 //TODO: switch statement per game since JSON's per game is case by case
 //TODO: specific games would need their own class to display data in DailyDataBox
 
-
+//TODO: add didReset to frontend
+//TODO: reroute back to login when refreshed
 const customStyles = {
     content : {
         top                   : '50%',
@@ -148,7 +149,6 @@ class AddDailyInformation extends Component {
         this.setState({title: e.target.value});
         console.log(this.state.title);
     }
-//TODO: fix bug with remove being improper
     handleSubmit(e){
         console.log("info submitted");
         console.log(this.state.title);
@@ -165,12 +165,12 @@ class AddDailyInformation extends Component {
         })
         .then(function (response){
             console.log('success');
+            this.props.updateAdd(this.state.title,this.state.time);
             console.log(response);
-        })
+        }.bind(this))
         .catch(function (error){
             console.log(error);
         });
-        //TODO: needs to reference time and data to backend
         this.closeModal();
     }
     render(){
@@ -235,7 +235,8 @@ class DailyInformation extends Component {
 class DailyDataBox extends Component {
     constructor(props){
         super(props);
-        this.updateRemove         = this.updateRemove.bind(this);
+        this.updateRemove = this.updateRemove.bind(this);
+        this.updateAdd    = this.updateAdd.bind(this);
     }
 
     state = {
@@ -263,15 +264,21 @@ class DailyDataBox extends Component {
             console.log(error);
         });
     }
-//TODO: a bug with update remove when clicked too fast it sometimes doesn't register
     updateRemove(removed){
-        for(let i = 0; i < this.state.dailyData.length; i++){
-            console.log(this.state.dailyData[i].fields.title);
-            if(removed == this.state.dailyData[i].fields.title){
-                delete this.state.dailyData[i];
-                this.setState({dailyData: this.state.dailyData});
+        var updateData = this.state.dailyData;
+        for(let i = 0; i < updateData.length; i++){
+            console.log(updateData[i].fields.title);
+            if(removed == updateData[i].fields.title){
+                updateData.splice(i,1)
+                this.setState({dailyData: updateData});
             }
         }
+    }
+
+    updateAdd(title,time){
+        var updateAddedDaily = {fields:{title:title,reset:null,resetTime:time}};
+        this.state.dailyData.push(updateAddedDaily);
+        this.setState({dailyData:this.state.dailyData})
     }
 
     render(){
@@ -281,7 +288,7 @@ class DailyDataBox extends Component {
         return(
             <div>
                 <DailyInformation data={this.state.dailyData}/>
-                <AddDailyInformation showAddButton={this.props.showAddButton} data={this.state.dailyData} updateRemove={this.updateRemove}/>
+                <AddDailyInformation showAddButton={this.props.showAddButton} data={this.state.dailyData} updateRemove={this.updateRemove} updateAdd={this.updateAdd}/>
             </div>
         );
     }

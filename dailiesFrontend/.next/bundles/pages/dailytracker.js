@@ -3860,6 +3860,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 //TODO: eventually implement daylight savings
 //TODO: switch statement per game since JSON's per game is case by case
 //TODO: specific games would need their own class to display data in DailyDataBox
+//TODO: add didReset to frontend
+//TODO: reroute back to login when refreshed
 
 var customStyles = {
   content: {
@@ -3920,18 +3922,18 @@ function (_Component) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 70
+          lineNumber: 71
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 71
+          lineNumber: 72
         }
       }, title), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
         onClick: this.handleRemove,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 72
+          lineNumber: 73
         }
       }, "remove"));
     }
@@ -3988,14 +3990,14 @@ function (_Component2) {
           updateRemove: _this3.props.updateRemove,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 89
+            lineNumber: 90
           }
         }));
       });
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 92
+          lineNumber: 93
         }
       }, display);
     }
@@ -4023,17 +4025,17 @@ function (_Component3) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 103
+          lineNumber: 104
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 104
+          lineNumber: 105
         }
       }, title), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 105
+          lineNumber: 106
         }
       }, data.time_to_reset));
     }
@@ -4105,8 +4107,7 @@ function (_Component4) {
         title: e.target.value
       });
       console.log(this.state.title);
-    } //TODO: fix bug with remove being improper
-
+    }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
@@ -4124,11 +4125,11 @@ function (_Component4) {
         }
       }).then(function (response) {
         console.log('success');
+        this.props.updateAdd(this.state.title, this.state.time);
         console.log(response);
-      }).catch(function (error) {
+      }.bind(this)).catch(function (error) {
         console.log(error);
-      }); //TODO: needs to reference time and data to backend
-
+      });
       this.closeModal();
     }
   }, {
@@ -4320,6 +4321,7 @@ function (_Component6) {
       }
     });
     _this6.updateRemove = _this6.updateRemove.bind(_assertThisInitialized(_this6));
+    _this6.updateAdd = _this6.updateAdd.bind(_assertThisInitialized(_this6));
     return _this6;
   }
 
@@ -4345,21 +4347,37 @@ function (_Component6) {
         //if error do just clear fields and display mismatch user or password
         console.log(error);
       });
-    } //TODO: a bug with update remove when clicked too fast it sometimes doesn't register
-
+    }
   }, {
     key: "updateRemove",
     value: function updateRemove(removed) {
-      for (var i = 0; i < this.state.dailyData.length; i++) {
-        console.log(this.state.dailyData[i].fields.title);
+      var updateData = this.state.dailyData;
 
-        if (removed == this.state.dailyData[i].fields.title) {
-          delete this.state.dailyData[i];
+      for (var i = 0; i < updateData.length; i++) {
+        console.log(updateData[i].fields.title);
+
+        if (removed == updateData[i].fields.title) {
+          updateData.splice(i, 1);
           this.setState({
-            dailyData: this.state.dailyData
+            dailyData: updateData
           });
         }
       }
+    }
+  }, {
+    key: "updateAdd",
+    value: function updateAdd(title, time) {
+      var updateAddedDaily = {
+        fields: {
+          title: title,
+          reset: null,
+          resetTime: time
+        }
+      };
+      this.state.dailyData.push(updateAddedDaily);
+      this.setState({
+        dailyData: this.state.dailyData
+      });
     }
   }, {
     key: "render",
@@ -4370,21 +4388,22 @@ function (_Component6) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 282
+          lineNumber: 289
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(DailyInformation, {
         data: this.state.dailyData,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 283
+          lineNumber: 290
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(AddDailyInformation, {
         showAddButton: this.props.showAddButton,
         data: this.state.dailyData,
         updateRemove: this.updateRemove,
+        updateAdd: this.updateAdd,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 284
+          lineNumber: 291
         }
       }));
     }
