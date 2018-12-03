@@ -101,6 +101,34 @@ def removeUserDaily(request):
     return HttpResponse('error with authentication')
 
 @csrf_exempt
+def setDailyDate(request):
+    try:
+        body_unicode = request.body.decode('utf-8')
+        body_data = json.loads(body_unicode)
+        username = body_data['username']
+        token = body_data['token']
+        title = body_data['title']
+        reset = body_data['reset']
+    except:
+        username = request.POST.get('username')
+        token = request.POST.get('token')
+        title = request.POST.get('title')
+        reset = request.POST.get('reset')
+    if token and username is not None:
+        try:
+            userObject = User.objects.get(username=username)
+            tokenObject  = Token.objects.get(key=token)
+        except:
+            return HttpResponse('error with authentication')
+        if tokenObject.user_id == userObject.id:
+            data = dailies.objects.get(userid = tokenObject.user_id, title = title);
+            data.reset = reset;
+            data.save();
+            return HttpResponse('update')
+        return HttpResponse('error with authentication')
+    return HttpResponse('error with authentication')
+
+@csrf_exempt
 def getUserDailies(request):
     try:
         body_unicode = request.body.decode('utf-8')

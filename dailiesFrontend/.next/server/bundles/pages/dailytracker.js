@@ -286,13 +286,82 @@ var DailyRow =
 function (_Component3) {
   _inherits(DailyRow, _Component3);
 
-  function DailyRow() {
+  function DailyRow(props) {
+    var _this4;
+
     _classCallCheck(this, DailyRow);
 
-    return _possibleConstructorReturn(this, (DailyRow.__proto__ || Object.getPrototypeOf(DailyRow)).apply(this, arguments));
+    _this4 = _possibleConstructorReturn(this, (DailyRow.__proto__ || Object.getPrototypeOf(DailyRow)).call(this, props));
+    _this4.showFinishDaily = _this4.showFinishDaily.bind(_assertThisInitialized(_this4));
+    _this4.setFinishDaily = _this4.setFinishDaily.bind(_assertThisInitialized(_this4));
+    _this4.hasDailyReset = _this4.hasDailyReset.bind(_assertThisInitialized(_this4));
+    return _this4;
   }
 
   _createClass(DailyRow, [{
+    key: "setFinishDaily",
+    value: function setFinishDaily() {
+      console.log('setFinishDaily');
+      var today = new Date();
+      var tomorrow = new Date();
+      tomorrow.setDate(today.getDate() + 1);
+      var dateFormat = tomorrow.getFullYear() + '-' + (tomorrow.getMonth() + 1) + '-' + tomorrow.getDate();
+      __WEBPACK_IMPORTED_MODULE_5_axios___default()({
+        method: 'post',
+        url: __WEBPACK_IMPORTED_MODULE_4__weblinks__["a" /* weblinks */].link.setDailyDate,
+        data: {
+          username: __WEBPACK_IMPORTED_MODULE_1__credentials__["a" /* credentials */].user.username,
+          token: __WEBPACK_IMPORTED_MODULE_1__credentials__["a" /* credentials */].user.token,
+          title: this.props.data.title,
+          reset: dateFormat
+        }
+      }).then(function (response) {
+        console.log('success');
+      }).catch(function (error) {
+        console.log(error);
+      });
+    } //TODO: update UI
+
+  }, {
+    key: "hasDailyReset",
+    value: function hasDailyReset() {
+      var UTCstringmodifier = 'T' + this.props.data.resetTime;
+      console.log('hasDailyReset');
+      var resetDate = new Date();
+      resetDate.setTime(Date.parse(this.props.data.reset + UTCstringmodifier));
+      console.log('reset date');
+      console.log(Date.parse(resetDate));
+
+      if (Date.now() > Date.parse(this.props.data.reset + UTCstringmodifier)) {
+        console.log("day has past");
+        return true;
+      }
+
+      return false;
+    }
+  }, {
+    key: "showFinishDaily",
+    value: function showFinishDaily() {
+      console.log(this.props.data); //this needs to also check if the reset is yesterday
+
+      if (this.props.data.reset == null || this.hasDailyReset()) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
+          onClick: this.setFinishDaily,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 149
+          }
+        }, "null");
+      }
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 151
+        }
+      }, "test");
+    }
+  }, {
     key: "render",
     value: function render() {
       var data = this.props.data;
@@ -300,19 +369,14 @@ function (_Component3) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 104
+          lineNumber: 158
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 105
+          lineNumber: 159
         }
-      }, title), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 106
-        }
-      }, data.time_to_reset));
+      }, title), this.showFinishDaily());
     }
   }]);
 
@@ -325,23 +389,23 @@ function (_Component4) {
   _inherits(AddDailyInformation, _Component4);
 
   function AddDailyInformation() {
-    var _this4;
+    var _this5;
 
     _classCallCheck(this, AddDailyInformation);
 
-    _this4 = _possibleConstructorReturn(this, (AddDailyInformation.__proto__ || Object.getPrototypeOf(AddDailyInformation)).call(this));
-    _this4.state = {
+    _this5 = _possibleConstructorReturn(this, (AddDailyInformation.__proto__ || Object.getPrototypeOf(AddDailyInformation)).call(this));
+    _this5.state = {
       modalIsOpen: false,
       title: '',
       time: ''
     };
-    _this4.openModal = _this4.openModal.bind(_assertThisInitialized(_this4));
-    _this4.afterOpenModal = _this4.afterOpenModal.bind(_assertThisInitialized(_this4));
-    _this4.closeModal = _this4.closeModal.bind(_assertThisInitialized(_this4));
-    _this4.handleSubmit = _this4.handleSubmit.bind(_assertThisInitialized(_this4));
-    _this4.handleTimeChange = _this4.handleTimeChange.bind(_assertThisInitialized(_this4));
-    _this4.handleTitleChange = _this4.handleTitleChange.bind(_assertThisInitialized(_this4));
-    return _this4;
+    _this5.openModal = _this5.openModal.bind(_assertThisInitialized(_this5));
+    _this5.afterOpenModal = _this5.afterOpenModal.bind(_assertThisInitialized(_this5));
+    _this5.closeModal = _this5.closeModal.bind(_assertThisInitialized(_this5));
+    _this5.handleSubmit = _this5.handleSubmit.bind(_assertThisInitialized(_this5));
+    _this5.handleTimeChange = _this5.handleTimeChange.bind(_assertThisInitialized(_this5));
+    _this5.handleTitleChange = _this5.handleTitleChange.bind(_assertThisInitialized(_this5));
+    return _this5;
   }
 
   _createClass(AddDailyInformation, [{
@@ -381,7 +445,6 @@ function (_Component4) {
       this.setState({
         title: e.target.value
       });
-      console.log(this.state.title);
     }
   }, {
     key: "handleSubmit",
@@ -410,7 +473,7 @@ function (_Component4) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
 
       var button;
 
@@ -420,7 +483,7 @@ function (_Component4) {
           onClick: this.openModal,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 179
+            lineNumber: 232
           }
         }, "Click to edit dailies");
       }
@@ -428,12 +491,12 @@ function (_Component4) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 182
+          lineNumber: 235
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 183
+          lineNumber: 236
         }
       }, button), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_modal___default.a, {
         isOpen: this.state.modalIsOpen,
@@ -443,26 +506,26 @@ function (_Component4) {
         contentLabel: "Modify daily menu",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 184
+          lineNumber: 237
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h2", {
         ref: function ref(subtitle) {
-          return _this5.subtitle = subtitle;
+          return _this6.subtitle = subtitle;
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 191
+          lineNumber: 244
         }
       }, "Add Game Daily"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
         onClick: this.closeModal,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 192
+          lineNumber: 245
         }
       }, "close"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 193
+          lineNumber: 246
         }
       }, "Please input daily name and time of reset"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
         type: "text",
@@ -470,7 +533,7 @@ function (_Component4) {
         onChange: this.handleTitleChange,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 194
+          lineNumber: 247
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
         type: "time",
@@ -478,7 +541,7 @@ function (_Component4) {
         onChange: this.handleTimeChange,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 195
+          lineNumber: 248
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
         type: "submit",
@@ -486,19 +549,19 @@ function (_Component4) {
         onClick: this.handleSubmit,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 196
+          lineNumber: 249
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 197
+          lineNumber: 250
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ModalContainer, {
         data: this.props.data,
         updateRemove: this.props.updateRemove,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 198
+          lineNumber: 251
         }
       }))));
     }
@@ -534,7 +597,7 @@ function (_Component5) {
           key: data.fields.title,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 217
+            lineNumber: 270
           }
         }));
         console.log(data.fields.title);
@@ -542,32 +605,32 @@ function (_Component5) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 222
+          lineNumber: 275
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("thread", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 223
+          lineNumber: 276
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 224
+          lineNumber: 277
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 225
+          lineNumber: 278
         }
       }, "Title"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 226
+          lineNumber: 279
         }
       }, "Is completed"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tbody", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 229
+          lineNumber: 282
         }
       }, rows));
     }
@@ -582,12 +645,12 @@ function (_Component6) {
   _inherits(DailyDataBox, _Component6);
 
   function DailyDataBox(props) {
-    var _this6;
+    var _this7;
 
     _classCallCheck(this, DailyDataBox);
 
-    _this6 = _possibleConstructorReturn(this, (DailyDataBox.__proto__ || Object.getPrototypeOf(DailyDataBox)).call(this, props));
-    Object.defineProperty(_assertThisInitialized(_this6), "state", {
+    _this7 = _possibleConstructorReturn(this, (DailyDataBox.__proto__ || Object.getPrototypeOf(DailyDataBox)).call(this, props));
+    Object.defineProperty(_assertThisInitialized(_this7), "state", {
       configurable: true,
       enumerable: true,
       writable: true,
@@ -595,9 +658,9 @@ function (_Component6) {
         dailyData: []
       }
     });
-    _this6.updateRemove = _this6.updateRemove.bind(_assertThisInitialized(_this6));
-    _this6.updateAdd = _this6.updateAdd.bind(_assertThisInitialized(_this6));
-    return _this6;
+    _this7.updateRemove = _this7.updateRemove.bind(_assertThisInitialized(_this7));
+    _this7.updateAdd = _this7.updateAdd.bind(_assertThisInitialized(_this7));
+    return _this7;
   }
 
   _createClass(DailyDataBox, [{
@@ -663,13 +726,13 @@ function (_Component6) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 289
+          lineNumber: 342
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(DailyInformation, {
         data: this.state.dailyData,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 290
+          lineNumber: 343
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(AddDailyInformation, {
         showAddButton: this.props.showAddButton,
@@ -678,7 +741,7 @@ function (_Component6) {
         updateAdd: this.updateAdd,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 291
+          lineNumber: 344
         }
       }));
     }
@@ -795,7 +858,8 @@ var weblinks = {
   link: {
     getDailies: 'http://127.0.0.1:8000/account/getUserDailies/',
     removeDailies: 'http://127.0.0.1:8000/account/removeUserDaily/',
-    addDailies: 'http://127.0.0.1:8000/account/addUserDaily/'
+    addDailies: 'http://127.0.0.1:8000/account/addUserDaily/',
+    setDailyDate: 'http://127.0.0.1:8000/account/setDailyDate/'
   }
 };
 var weblinksContext = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createContext(weblinks.link);

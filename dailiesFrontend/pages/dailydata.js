@@ -96,6 +96,60 @@ class ModalContainer extends Component {
 }
 
 class DailyRow extends Component{
+    constructor(props){
+        super(props);
+        this.showFinishDaily = this.showFinishDaily.bind(this);
+        this.setFinishDaily  = this.setFinishDaily.bind(this);
+        this.hasDailyReset   = this.hasDailyReset.bind(this);
+    }
+
+    setFinishDaily(){
+        console.log('setFinishDaily');
+        var today = new Date();
+        var tomorrow = new Date();
+        tomorrow.setDate(today.getDate()+1);
+        const dateFormat = tomorrow.getFullYear() + '-' + (tomorrow.getMonth()+1) + '-' + tomorrow.getDate();
+        axios({
+            method: 'post',
+            url: weblinks.link.setDailyDate,
+            data: {
+                username:       credentials.user.username,
+                token:          credentials.user.token,
+                title:          this.props.data.title,
+                reset:          dateFormat,
+            },
+        })
+        .then(function (response){
+            console.log('success');
+
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+    }
+//TODO: update UI
+    hasDailyReset(){
+        const UTCstringmodifier = 'T' + this.props.data.resetTime;
+        console.log('hasDailyReset');
+        var resetDate = new Date();
+        resetDate.setTime(Date.parse(this.props.data.reset + UTCstringmodifier));
+        console.log('reset date');
+        console.log(Date.parse(resetDate));
+        if(Date.now() > Date.parse(this.props.data.reset + UTCstringmodifier)){
+            console.log("day has past");
+            return true;
+        }
+        return false;
+    }
+
+    showFinishDaily(){
+        console.log(this.props.data);
+        //this needs to also check if the reset is yesterday
+        if(this.props.data.reset == null || this.hasDailyReset()){
+            return <button onClick={this.setFinishDaily}>null</button>
+        }
+        return <button>test</button>
+    }
     render(){
         const data = this.props.data;
         const title = data.title;
@@ -103,7 +157,7 @@ class DailyRow extends Component{
         return(
             <tr>
                 <td>{title}</td>
-                <td>{data.time_to_reset}</td>
+                {this.showFinishDaily()}
             </tr>
         );
     }
@@ -147,7 +201,6 @@ class AddDailyInformation extends Component {
 
     handleTitleChange(e){
         this.setState({title: e.target.value});
-        console.log(this.state.title);
     }
     handleSubmit(e){
         console.log("info submitted");
