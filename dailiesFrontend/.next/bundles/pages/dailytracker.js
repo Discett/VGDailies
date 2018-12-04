@@ -4041,8 +4041,9 @@ function (_Component3) {
           reset: dateFormat
         }
       }).then(function (response) {
+        this.props.updateTime(this.props.data.title, dateFormat);
         console.log('success');
-      }).catch(function (error) {
+      }.bind(this)).catch(function (error) {
         console.log(error);
       });
     } //TODO: update UI
@@ -4074,7 +4075,7 @@ function (_Component3) {
           onClick: this.setFinishDaily,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 149
+            lineNumber: 150
           }
         }, "null");
       }
@@ -4082,7 +4083,7 @@ function (_Component3) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 151
+          lineNumber: 152
         }
       }, "test");
     }
@@ -4094,12 +4095,12 @@ function (_Component3) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 158
+          lineNumber: 159
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 159
+          lineNumber: 160
         }
       }, title), this.showFinishDaily());
     }
@@ -4208,7 +4209,7 @@ function (_Component4) {
           onClick: this.openModal,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 232
+            lineNumber: 233
           }
         }, "Click to edit dailies");
       }
@@ -4216,12 +4217,12 @@ function (_Component4) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 235
+          lineNumber: 236
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 236
+          lineNumber: 237
         }
       }, button), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_modal___default.a, {
         isOpen: this.state.modalIsOpen,
@@ -4231,7 +4232,7 @@ function (_Component4) {
         contentLabel: "Modify daily menu",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 237
+          lineNumber: 238
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h2", {
         ref: function ref(subtitle) {
@@ -4239,18 +4240,18 @@ function (_Component4) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 244
+          lineNumber: 245
         }
       }, "Add Game Daily"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
         onClick: this.closeModal,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 245
+          lineNumber: 246
         }
       }, "close"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 246
+          lineNumber: 247
         }
       }, "Please input daily name and time of reset"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
         type: "text",
@@ -4258,7 +4259,7 @@ function (_Component4) {
         onChange: this.handleTitleChange,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 247
+          lineNumber: 248
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
         type: "time",
@@ -4266,7 +4267,7 @@ function (_Component4) {
         onChange: this.handleTimeChange,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 248
+          lineNumber: 249
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
         type: "submit",
@@ -4274,19 +4275,19 @@ function (_Component4) {
         onClick: this.handleSubmit,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 249
+          lineNumber: 250
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 250
+          lineNumber: 251
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ModalContainer, {
         data: this.props.data,
         updateRemove: this.props.updateRemove,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 251
+          lineNumber: 252
         }
       }))));
     }
@@ -4313,6 +4314,8 @@ function (_Component5) {
   _createClass(DailyInformation, [{
     key: "render",
     value: function render() {
+      var _this7 = this;
+
       var rows = [];
       console.log("dailyInformation"); //console.log(this.props.data);
 
@@ -4320,9 +4323,10 @@ function (_Component5) {
         rows.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(DailyRow, {
           data: data.fields,
           key: data.fields.title,
+          updateTime: _this7.props.updateTime,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 270
+            lineNumber: 271
           }
         }));
         console.log(data.fields.title);
@@ -4330,32 +4334,32 @@ function (_Component5) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 275
+          lineNumber: 276
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("thread", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 276
+          lineNumber: 277
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 277
+          lineNumber: 278
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 278
+          lineNumber: 279
         }
       }, "Title"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 279
+          lineNumber: 280
         }
       }, "Is completed"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tbody", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 282
+          lineNumber: 283
         }
       }, rows));
     }
@@ -4370,12 +4374,12 @@ function (_Component6) {
   _inherits(DailyDataBox, _Component6);
 
   function DailyDataBox(props) {
-    var _this7;
+    var _this8;
 
     _classCallCheck(this, DailyDataBox);
 
-    _this7 = _possibleConstructorReturn(this, (DailyDataBox.__proto__ || Object.getPrototypeOf(DailyDataBox)).call(this, props));
-    Object.defineProperty(_assertThisInitialized(_this7), "state", {
+    _this8 = _possibleConstructorReturn(this, (DailyDataBox.__proto__ || Object.getPrototypeOf(DailyDataBox)).call(this, props));
+    Object.defineProperty(_assertThisInitialized(_this8), "state", {
       configurable: true,
       enumerable: true,
       writable: true,
@@ -4383,9 +4387,10 @@ function (_Component6) {
         dailyData: []
       }
     });
-    _this7.updateRemove = _this7.updateRemove.bind(_assertThisInitialized(_this7));
-    _this7.updateAdd = _this7.updateAdd.bind(_assertThisInitialized(_this7));
-    return _this7;
+    _this8.updateRemove = _this8.updateRemove.bind(_assertThisInitialized(_this8));
+    _this8.updateAdd = _this8.updateAdd.bind(_assertThisInitialized(_this8));
+    _this8.updateTime = _this8.updateTime.bind(_assertThisInitialized(_this8));
+    return _this8;
   }
 
   _createClass(DailyDataBox, [{
@@ -4443,6 +4448,23 @@ function (_Component6) {
       });
     }
   }, {
+    key: "updateTime",
+    value: function updateTime(title, date) {
+      console.log(this.state.dailyData);
+      var updateData = this.state.dailyData;
+
+      for (var i = 0; i < updateData.length; i++) {
+        console.log(updateData[i].fields.title);
+
+        if (title == updateData[i].fields.title) {
+          updateData[i].fields.reset = date;
+          this.setState({
+            dailyData: updateData
+          });
+        }
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       //console.log("token");
@@ -4451,13 +4473,14 @@ function (_Component6) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 342
+          lineNumber: 357
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(DailyInformation, {
         data: this.state.dailyData,
+        updateTime: this.updateTime,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 343
+          lineNumber: 358
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(AddDailyInformation, {
         showAddButton: this.props.showAddButton,
@@ -4466,7 +4489,7 @@ function (_Component6) {
         updateAdd: this.updateAdd,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 344
+          lineNumber: 359
         }
       }));
     }

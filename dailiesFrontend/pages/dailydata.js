@@ -120,9 +120,10 @@ class DailyRow extends Component{
             },
         })
         .then(function (response){
+            this.props.updateTime(this.props.data.title,dateFormat);
             console.log('success');
 
-        })
+        }.bind(this))
         .catch(function (error){
             console.log(error);
         });
@@ -267,7 +268,7 @@ class DailyInformation extends Component {
         //console.log(this.props.data);
         this.props.data.forEach((data)=>{
             rows.push(
-                <DailyRow data={data.fields} key={data.fields.title}/>
+                <DailyRow data={data.fields} key={data.fields.title} updateTime={this.props.updateTime}/>
             );
             console.log(data.fields.title);
         })
@@ -290,6 +291,7 @@ class DailyDataBox extends Component {
         super(props);
         this.updateRemove = this.updateRemove.bind(this);
         this.updateAdd    = this.updateAdd.bind(this);
+        this.updateTime   = this.updateTime.bind(this);
     }
 
     state = {
@@ -317,8 +319,9 @@ class DailyDataBox extends Component {
             console.log(error);
         });
     }
+
     updateRemove(removed){
-        var updateData = this.state.dailyData;
+        const updateData = this.state.dailyData;
         for(let i = 0; i < updateData.length; i++){
             console.log(updateData[i].fields.title);
             if(removed == updateData[i].fields.title){
@@ -329,9 +332,21 @@ class DailyDataBox extends Component {
     }
 
     updateAdd(title,time){
-        var updateAddedDaily = {fields:{title:title,reset:null,resetTime:time}};
+        const updateAddedDaily = {fields:{title:title,reset:null,resetTime:time}};
         this.state.dailyData.push(updateAddedDaily);
         this.setState({dailyData:this.state.dailyData})
+    }
+
+    updateTime(title,date){
+        console.log(this.state.dailyData);
+        const updateData = this.state.dailyData;
+        for(let i = 0; i < updateData.length; i++){
+            console.log(updateData[i].fields.title);
+            if(title == updateData[i].fields.title){
+                updateData[i].fields.reset = date;
+                this.setState({dailyData: updateData});
+            }
+        }
     }
 
     render(){
@@ -340,7 +355,7 @@ class DailyDataBox extends Component {
         //console.log(this.state.dailyData);
         return(
             <div>
-                <DailyInformation data={this.state.dailyData}/>
+                <DailyInformation data={this.state.dailyData} updateTime={this.updateTime}/>
                 <AddDailyInformation showAddButton={this.props.showAddButton} data={this.state.dailyData} updateRemove={this.updateRemove} updateAdd={this.updateAdd}/>
             </div>
         );
