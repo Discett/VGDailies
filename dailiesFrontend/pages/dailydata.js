@@ -289,13 +289,14 @@ class DailyInformation extends Component {
 class DailyDataBox extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            dailyData:[],
+            intervalId: null,
+        }
         this.updateRemove = this.updateRemove.bind(this);
         this.updateAdd    = this.updateAdd.bind(this);
         this.updateTime   = this.updateTime.bind(this);
-    }
-
-    state = {
-        dailyData:[]
+        this.intervalTick = this.intervalTick.bind(this);
     }
 
     componentDidMount(){
@@ -318,6 +319,15 @@ class DailyDataBox extends Component {
             //if error do just clear fields and display mismatch user or password
             console.log(error);
         });
+        setInterval(this.intervalTick, 5000);
+    }
+
+    intervalTick(){
+        this.setState({ intervalId: Date.now() });
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.state.intervalId)
     }
 
     updateRemove(removed){
@@ -350,7 +360,7 @@ class DailyDataBox extends Component {
     }
 
     render(){
-        //console.log("token");
+        console.log("token");
         //console.log(credentials.user.token);
         //console.log(this.state.dailyData);
         return(

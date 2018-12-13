@@ -106,6 +106,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_next_link___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_next_link__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_next_router__ = __webpack_require__("next/router");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_next_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_next_router__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__weblinks__ = __webpack_require__("./pages/weblinks.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__material_ui_core__ = __webpack_require__("@material-ui/core");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__material_ui_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__material_ui_core_styles__ = __webpack_require__("@material-ui/core/styles");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__material_ui_core_styles___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__material_ui_core_styles__);
 var _jsxFileName = "C:\\Users\\Luong\\Desktop\\React\\daily-tracker\\dailiesFrontend\\pages\\login.js";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -128,24 +133,56 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
-var Login =
+
+
+var styles = {
+  root: {
+    margin: 20,
+    padding: 20,
+    maxWidth: 400
+  }
+  /*
+  const loginStyle = {
+      WebkitTransition: 'all',
+      msTransition: 'all',
+      height: '100%',
+      width: '100%',
+      margin: -8,
+      position: 'absolute',
+      backgroundColor: 'Gray',
+  };
+  
+  const formStyle = {
+      WebkitTransition: 'all',
+      msTransition: 'all',
+      //top: '50%',
+      display: 'block',
+      //left:'50%',
+      //margin: '-70px 0 0 -170px',
+      margin: '50px auto',
+      position: 'absolute',
+      backgroundColor: 'White',
+  };
+  */
+
+};
+var strings = {
+  EnterUserName: 'Username:',
+  EnterPassword: 'Password:',
+  LoginHeader: 'Login Page',
+  Submit: 'Submit'
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_7__material_ui_core_styles__["withStyles"])(styles)(
 /*#__PURE__*/
 function (_Component) {
   _inherits(Login, _Component);
 
-  // we can put URL into credentials, probably should do this if app gets more complex
   function Login(props) {
     var _this;
 
     _classCallCheck(this, Login);
 
     _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
-    Object.defineProperty(_assertThisInitialized(_this), "url", {
-      configurable: true,
-      enumerable: true,
-      writable: true,
-      value: 'http://127.0.0.1:8000/account/login/'
-    });
     _this.state = {
       userSubmittedUsername: '',
       userSubmittedPassword: ''
@@ -183,13 +220,13 @@ function (_Component) {
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("credentialsContext", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 35
+          lineNumber: 75
         }
       }, __WEBPACK_IMPORTED_MODULE_2__credentials__["a" /* credentials */].user.username = this.state.userSubmittedUsername); //query database recieves a response of token or incorrect username/password
 
       __WEBPACK_IMPORTED_MODULE_1_axios___default()({
         method: 'post',
-        url: this.url,
+        url: __WEBPACK_IMPORTED_MODULE_5__weblinks__["a" /* weblinks */].link.loginUrl,
         data: {
           userSubmittedUsername: this.state.userSubmittedUsername,
           userSubmittedPassword: this.state.userSubmittedPassword
@@ -205,7 +242,7 @@ function (_Component) {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("credentialsContext", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 52
+              lineNumber: 92
             }
           }, __WEBPACK_IMPORTED_MODULE_2__credentials__["a" /* credentials */].user.token = response.data);
           __WEBPACK_IMPORTED_MODULE_4_next_router___default.a.push('/dailytracker');
@@ -218,78 +255,117 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Grid"], {
+        container: true,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 67
+          lineNumber: 107
         }
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_next_link___default.a, {
-        href: "/",
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Grid"], {
+        container: true,
+        direction: "column",
+        alignItems: "flex-start",
+        justify: "space-between",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 68
+          lineNumber: 108
         }
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["AppBar"], {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 109
+        }
+      }, " ", strings.LoginHeader, " ")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Grid"], {
+        container: true,
+        justify: "center",
+        alignItems: "center",
+        direction: "column",
+        spacing: 0,
         style: {
-          padding: 5
+          minHeight: '80vh'
         },
+        position: "static",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 69
+          lineNumber: 112
         }
-      }, "Log in")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("form", {
-        className: "auth_form",
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Paper"], {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 114
+        }
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("form", {
         onSubmit: this.handleSubmit,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 71
+          lineNumber: 115
         }
-      }, "Please enter your user name", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Typography"], {
+        color: "textSecondary",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 72
+          lineNumber: 116
         }
-      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
-        type: "text",
+      }, strings.EnterUserName), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["TextField"], {
         name: "username",
         onChange: this.handleChangeUser,
+        label: strings.Username,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 73
+          lineNumber: 117
         }
-      }), " ", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", {
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Typography"], {
+        color: "textSecondary",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 73
+          lineNumber: 118
         }
-      }), "Please enter your password", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 74
-        }
-      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
-        type: "password",
+      }, strings.EnterPassword), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["TextField"], {
         name: "password",
+        type: "password",
         onChange: this.handleChangePassword,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 75
+          lineNumber: 119
         }
-      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Button"], {
         type: "submit",
-        value: "submit",
+        color: "primary",
+        variant: "text",
+        size: "large",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 76
+          lineNumber: 120
         }
-      })));
+      }, strings.Submit)))));
     }
   }]);
 
   return Login;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]))); //export default Login;
 
-/* harmony default export */ __webpack_exports__["default"] = (Login);
+/***/ }),
+
+/***/ "./pages/weblinks.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return weblinks; });
+/* unused harmony export weblinksContext */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+ //this is going to save user's credentials
+
+var weblinks = {
+  link: {
+    loginUrl: 'http://127.0.0.1:8000/account/login/',
+    getDailies: 'http://127.0.0.1:8000/account/getUserDailies/',
+    removeDailies: 'http://127.0.0.1:8000/account/removeUserDaily/',
+    addDailies: 'http://127.0.0.1:8000/account/addUserDaily/',
+    setDailyDate: 'http://127.0.0.1:8000/account/setDailyDate/'
+  }
+};
+var weblinksContext = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createContext(weblinks.link);
 
 /***/ }),
 
@@ -298,6 +374,20 @@ function (_Component) {
 
 module.exports = __webpack_require__("./pages/login.js");
 
+
+/***/ }),
+
+/***/ "@material-ui/core":
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core");
+
+/***/ }),
+
+/***/ "@material-ui/core/styles":
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/styles");
 
 /***/ }),
 
