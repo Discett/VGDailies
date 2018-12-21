@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -137,9 +137,21 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 var styles = {
   root: {
-    margin: 20,
-    padding: 20,
-    maxWidth: 400
+    backgroundColor: 'gray',
+    margin: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    top: 0,
+    padding: 0,
+    overflow: 'hidden',
+    height: '100%',
+    width: '100%',
+    position: 'absolute'
+  },
+  paperBackground: {
+    backgroundColor: 'white',
+    padding: 50
   }
   /*
   const loginStyle = {
@@ -172,7 +184,8 @@ var strings = {
   LoginHeader: 'Login Page',
   Submit: 'Submit'
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_7__material_ui_core_styles__["withStyles"])(styles)(
+
+var Login =
 /*#__PURE__*/
 function (_Component) {
   _inherits(Login, _Component);
@@ -220,7 +233,7 @@ function (_Component) {
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("credentialsContext", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 75
+          lineNumber: 86
         }
       }, __WEBPACK_IMPORTED_MODULE_2__credentials__["a" /* credentials */].user.username = this.state.userSubmittedUsername); //query database recieves a response of token or incorrect username/password
 
@@ -242,7 +255,7 @@ function (_Component) {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("credentialsContext", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 92
+              lineNumber: 103
             }
           }, __WEBPACK_IMPORTED_MODULE_2__credentials__["a" /* credentials */].user.token = response.data);
           __WEBPACK_IMPORTED_MODULE_4_next_router___default.a.push('/dailytracker');
@@ -257,9 +270,10 @@ function (_Component) {
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Grid"], {
         container: true,
+        className: this.props.classes.root,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 107
+          lineNumber: 118
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Grid"], {
         container: true,
@@ -268,43 +282,43 @@ function (_Component) {
         justify: "space-between",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 108
+          lineNumber: 119
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["AppBar"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 109
+          lineNumber: 120
         }
       }, " ", strings.LoginHeader, " ")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Grid"], {
         container: true,
         justify: "center",
         alignItems: "center",
         direction: "column",
-        spacing: 0,
+        position: "static",
         style: {
           minHeight: '80vh'
         },
-        position: "static",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 112
+          lineNumber: 123
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Paper"], {
+        className: this.props.classes.paperBackground,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 114
+          lineNumber: 125
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("form", {
         onSubmit: this.handleSubmit,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 115
+          lineNumber: 126
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Typography"], {
         color: "textSecondary",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 116
+          lineNumber: 127
         }
       }, strings.EnterUserName), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["TextField"], {
         name: "username",
@@ -312,13 +326,13 @@ function (_Component) {
         label: strings.Username,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 117
+          lineNumber: 128
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Typography"], {
         color: "textSecondary",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 118
+          lineNumber: 129
         }
       }, strings.EnterPassword), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["TextField"], {
         name: "password",
@@ -326,7 +340,7 @@ function (_Component) {
         onChange: this.handleChangePassword,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 119
+          lineNumber: 130
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Button"], {
         type: "submit",
@@ -335,14 +349,16 @@ function (_Component) {
         size: "large",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 120
+          lineNumber: 131
         }
       }, strings.Submit)))));
     }
   }]);
 
   return Login;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]))); //export default Login;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_7__material_ui_core_styles__["withStyles"])(styles)(Login));
 
 /***/ }),
 
@@ -369,7 +385,7 @@ var weblinksContext = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createContex
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./pages/login.js");

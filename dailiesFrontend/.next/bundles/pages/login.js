@@ -1,7 +1,7 @@
 module.exports =
 __NEXT_REGISTER_PAGE('/login', function() {
           var comp =
-      webpackJsonp([5],{
+      webpackJsonp([6],{
 
 /***/ "./node_modules/@babel/runtime/core-js/json/stringify.js":
 /***/ (function(module, exports, __webpack_require__) {
@@ -29646,13 +29646,13 @@ exports.default = _default;
 /* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_100__TextField___default.a; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_101__Toolbar__ = __webpack_require__("./node_modules/@material-ui/core/Toolbar/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_101__Toolbar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_101__Toolbar__);
-/* unused harmony reexport Toolbar */
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_101__Toolbar___default.a; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_102__Tooltip__ = __webpack_require__("./node_modules/@material-ui/core/Tooltip/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_102__Tooltip___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_102__Tooltip__);
 /* unused harmony reexport Tooltip */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_103__Typography__ = __webpack_require__("./node_modules/@material-ui/core/Typography/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_103__Typography___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_103__Typography__);
-/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_103__Typography___default.a; });
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_103__Typography___default.a; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_104__withMobileDialog__ = __webpack_require__("./node_modules/@material-ui/core/withMobileDialog/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_104__withMobileDialog___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_104__withMobileDialog__);
 /* unused harmony reexport withMobileDialog */
@@ -42616,7 +42616,7 @@ exports['default'] = function (str) {
 
   return CSS.escape(str);
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/webpack/buildin/global.js")))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/next/node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -42719,7 +42719,7 @@ if (global[ns] == null) global[ns] = 0;
 // we use a counter. Also it is more accurate, because user can manually reevaluate
 // the module.
 exports['default'] = global[ns]++;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/webpack/buildin/global.js")))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/next/node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -43284,6 +43284,37 @@ var warnLink = (0, _utils.execOnce)(_utils.warn);
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./node_modules/next/dist/lib/link.js")
+
+
+/***/ }),
+
+/***/ "./node_modules/next/node_modules/webpack/buildin/harmony-module.js":
+/***/ (function(module, exports) {
+
+module.exports = function(originalModule) {
+	if(!originalModule.webpackPolyfill) {
+		var module = Object.create(originalModule);
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		Object.defineProperty(module, "exports", {
+			enumerable: true,
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
 
 
 /***/ }),
@@ -46295,7 +46326,7 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/webpack/buildin/global.js")))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/next/node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -47118,7 +47149,7 @@ if (typeof self !== 'undefined') {
 var result = Object(__WEBPACK_IMPORTED_MODULE_0__ponyfill_js__["a" /* default */])(root);
 /* harmony default export */ __webpack_exports__["default"] = (result);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/webpack/buildin/global.js"), __webpack_require__("./node_modules/webpack/buildin/harmony-module.js")(module)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/next/node_modules/webpack/buildin/global.js"), __webpack_require__("./node_modules/next/node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ }),
 
@@ -47216,37 +47247,6 @@ module.exports = warning;
 
 /***/ }),
 
-/***/ "./node_modules/webpack/buildin/harmony-module.js":
-/***/ (function(module, exports) {
-
-module.exports = function(originalModule) {
-	if(!originalModule.webpackPolyfill) {
-		var module = Object.create(originalModule);
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		Object.defineProperty(module, "exports", {
-			enumerable: true,
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-
 /***/ "./pages/credentials.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -47282,7 +47282,7 @@ var credentialsContext = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createCon
       }
     })(typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__.default : (module.exports.default || module.exports), "/credentials")
   
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/webpack/buildin/harmony-module.js")(module)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/next/node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ }),
 
@@ -47330,9 +47330,21 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 var styles = {
   root: {
-    margin: 20,
-    padding: 20,
-    maxWidth: 400
+    backgroundColor: 'gray',
+    margin: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    top: 0,
+    padding: 0,
+    overflow: 'hidden',
+    height: '100%',
+    width: '100%',
+    position: 'absolute'
+  },
+  paperBackground: {
+    backgroundColor: 'white',
+    padding: 50
   }
   /*
   const loginStyle = {
@@ -47365,7 +47377,8 @@ var strings = {
   LoginHeader: 'Login Page',
   Submit: 'Submit'
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_7__material_ui_core_styles__["withStyles"])(styles)(
+
+var Login =
 /*#__PURE__*/
 function (_Component) {
   _inherits(Login, _Component);
@@ -47413,7 +47426,7 @@ function (_Component) {
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("credentialsContext", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 75
+          lineNumber: 86
         }
       }, __WEBPACK_IMPORTED_MODULE_2__credentials__["a" /* credentials */].user.username = this.state.userSubmittedUsername); //query database recieves a response of token or incorrect username/password
 
@@ -47435,7 +47448,7 @@ function (_Component) {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("credentialsContext", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 92
+              lineNumber: 103
             }
           }, __WEBPACK_IMPORTED_MODULE_2__credentials__["a" /* credentials */].user.token = response.data);
           __WEBPACK_IMPORTED_MODULE_4_next_router___default.a.push('/dailytracker');
@@ -47450,9 +47463,10 @@ function (_Component) {
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["c" /* Grid */], {
         container: true,
+        className: this.props.classes.root,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 107
+          lineNumber: 118
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["c" /* Grid */], {
         container: true,
@@ -47461,43 +47475,43 @@ function (_Component) {
         justify: "space-between",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 108
+          lineNumber: 119
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["a" /* AppBar */], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 109
+          lineNumber: 120
         }
       }, " ", strings.LoginHeader, " ")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["c" /* Grid */], {
         container: true,
         justify: "center",
         alignItems: "center",
         direction: "column",
-        spacing: 0,
+        position: "static",
         style: {
           minHeight: '80vh'
         },
-        position: "static",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 112
+          lineNumber: 123
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["d" /* Paper */], {
+        className: this.props.classes.paperBackground,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 114
+          lineNumber: 125
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("form", {
         onSubmit: this.handleSubmit,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 115
+          lineNumber: 126
         }
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["f" /* Typography */], {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["g" /* Typography */], {
         color: "textSecondary",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 116
+          lineNumber: 127
         }
       }, strings.EnterUserName), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["e" /* TextField */], {
         name: "username",
@@ -47505,13 +47519,13 @@ function (_Component) {
         label: strings.Username,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 117
+          lineNumber: 128
         }
-      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["f" /* Typography */], {
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["g" /* Typography */], {
         color: "textSecondary",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 118
+          lineNumber: 129
         }
       }, strings.EnterPassword), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["e" /* TextField */], {
         name: "password",
@@ -47519,7 +47533,7 @@ function (_Component) {
         onChange: this.handleChangePassword,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 119
+          lineNumber: 130
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["b" /* Button */], {
         type: "submit",
@@ -47528,14 +47542,16 @@ function (_Component) {
         size: "large",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 120
+          lineNumber: 131
         }
       }, strings.Submit)))));
     }
   }]);
 
   return Login;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]))); //export default Login;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_7__material_ui_core_styles__["withStyles"])(styles)(Login));
     (function (Component, route) {
       if(!Component) return
       if (false) return
@@ -47554,7 +47570,7 @@ function (_Component) {
       }
     })(typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__.default : (module.exports.default || module.exports), "/login")
   
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/webpack/buildin/harmony-module.js")(module)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/next/node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ }),
 
@@ -47596,11 +47612,11 @@ var weblinksContext = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createContex
       }
     })(typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__.default : (module.exports.default || module.exports), "/weblinks")
   
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/webpack/buildin/harmony-module.js")(module)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/next/node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./pages/login.js");
@@ -47608,7 +47624,7 @@ module.exports = __webpack_require__("./pages/login.js");
 
 /***/ })
 
-},[4])
+},[5])
           return { page: comp.default }
         })
       ;
