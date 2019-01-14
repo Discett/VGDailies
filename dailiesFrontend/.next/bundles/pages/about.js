@@ -29479,7 +29479,7 @@ exports.default = _default;
 /* unused harmony reexport Icon */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__IconButton__ = __webpack_require__("./node_modules/@material-ui/core/IconButton/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__IconButton___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_48__IconButton__);
-/* unused harmony reexport IconButton */
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_48__IconButton___default.a; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__Input__ = __webpack_require__("./node_modules/@material-ui/core/Input/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__Input___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_49__Input__);
 /* unused harmony reexport Input */
@@ -29543,7 +29543,7 @@ exports.default = _default;
 /* unused harmony reexport OutlinedInput */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_69__Paper__ = __webpack_require__("./node_modules/@material-ui/core/Paper/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_69__Paper___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_69__Paper__);
-/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_69__Paper___default.a; });
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_69__Paper___default.a; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_70__Popover__ = __webpack_require__("./node_modules/@material-ui/core/Popover/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_70__Popover___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_70__Popover__);
 /* unused harmony reexport Popover */
@@ -29636,16 +29636,16 @@ exports.default = _default;
 /* unused harmony reexport Tabs */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_100__TextField__ = __webpack_require__("./node_modules/@material-ui/core/TextField/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_100__TextField___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_100__TextField__);
-/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_100__TextField___default.a; });
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_100__TextField___default.a; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_101__Toolbar__ = __webpack_require__("./node_modules/@material-ui/core/Toolbar/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_101__Toolbar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_101__Toolbar__);
-/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_101__Toolbar___default.a; });
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_101__Toolbar___default.a; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_102__Tooltip__ = __webpack_require__("./node_modules/@material-ui/core/Tooltip/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_102__Tooltip___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_102__Tooltip__);
 /* unused harmony reexport Tooltip */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_103__Typography__ = __webpack_require__("./node_modules/@material-ui/core/Typography/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_103__Typography___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_103__Typography__);
-/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_103__Typography___default.a; });
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_103__Typography___default.a; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_104__withMobileDialog__ = __webpack_require__("./node_modules/@material-ui/core/withMobileDialog/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_104__withMobileDialog___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_104__withMobileDialog__);
 /* unused harmony reexport withMobileDialog */
@@ -41262,6 +41262,14 @@ module.exports = function(originalModule) {
 
 /***/ }),
 
+/***/ "./node_modules/next/router.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("./node_modules/next/dist/lib/router/index.js")
+
+
+/***/ }),
+
 /***/ "./node_modules/normalize-scroll-left/lib/main.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44808,7 +44816,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var styles = {
   root: {
-    backgroundColor: 'gray',
+    backgroundColor: 'white',
     margin: 0,
     left: 0,
     right: 0,
@@ -44839,20 +44847,32 @@ function (_Component) {
   _createClass(About, [{
     key: "render",
     value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["c" /* Grid */], {
-        container: true,
+      return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement("div", {
         className: this.props.classes.root,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 29
+        }
+      }, __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__dailyAppBar_js__["a" /* default */], {
+        name: "About",
         __source: {
           fileName: _jsxFileName,
           lineNumber: 30
         }
-      }, __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["g" /* Typography */], {
-        className: this.props.classes.aboutText,
+      }), __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["c" /* Grid */], {
+        container: true,
         __source: {
           fileName: _jsxFileName,
           lineNumber: 31
         }
-      }, "This website is created with React and Django. The primary goal is to create a space in which users can add daily trackers to their favorite games. This website would track the users daily progression in a game concerning \"dailies\" and resets accordingly. It is meant to remind playerswhen they have completed their \"daily\" for their current game(s) to those who are forgetful. This is accomplished in two different ways. First is to query the game in question with an API key supplied by the user, this information is then parsed and the relevant information displayed. Secondly should the game not have proper API support,the user then can create their own reminder and adjust the timer so that the \"dailies\" will reset in accordance to the game server. The main goal of this project was to learn the basics of Web Development primarily using updated technologies available at this current time."));
+      }, __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["h" /* Typography */], {
+        className: this.props.classes.aboutText,
+        variant: "h6",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 32
+        }
+      }, "This website is created with React and Django. The primary goal is to create a space in which users can add daily trackers to their favorite games. This website would track the users daily progression in a game concerning \"dailies\" and resets accordingly. It is meant to remind playerswhen they have completed their \"daily\" for their current game(s) to those who are forgetful. This is accomplished in two different ways. First is to query the game in question with an API key supplied by the user, this information is then parsed and the relevant information displayed. Secondly should the game not have proper API support,the user then can create their own reminder and adjust the timer so that the \"dailies\" will reset in accordance to the game server. The main goal of this project was to learn the basics of Web Development primarily using updated technologies available at this current time.")));
     }
   }]);
 
@@ -44891,6 +44911,8 @@ function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__material_ui_core_styles___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__material_ui_core_styles__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__("./node_modules/react/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_next_router__ = __webpack_require__("./node_modules/next/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_next_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_next_router__);
 var _jsxFileName = "C:\\Users\\Luong\\Desktop\\React\\daily-tracker\\dailiesFrontend\\pages\\dailyAppBar.js";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -44903,21 +44925,31 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 
 
  //Whatever is passed in from the header check and provide links as followed
 
 var styles = {
+  root: {
+    width: '100%',
+    position: 'fixed'
+  },
+  grow: {
+    flexGrow: 1
+  },
   header: {
+    padding: 0,
+    margin: 0,
     color: 'white'
   },
-  menubutton: {
-    color: 'blue',
-    flexGrow: 1
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20
   }
 };
 
@@ -44926,52 +44958,86 @@ var dailyAppBar =
 function (_Component) {
   _inherits(dailyAppBar, _Component);
 
-  function dailyAppBar() {
+  function dailyAppBar(props) {
+    var _this;
+
     _classCallCheck(this, dailyAppBar);
 
-    return _possibleConstructorReturn(this, (dailyAppBar.__proto__ || Object.getPrototypeOf(dailyAppBar)).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, (dailyAppBar.__proto__ || Object.getPrototypeOf(dailyAppBar)).call(this, props));
+    _this.goHome = _this.goHome.bind(_assertThisInitialized(_this));
+    _this.goAbout = _this.goAbout.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(dailyAppBar, [{
+    key: "goHome",
+    value: function goHome() {
+      __WEBPACK_IMPORTED_MODULE_3_next_router___default.a.push('/');
+    }
+  }, {
+    key: "goAbout",
+    value: function goAbout() {
+      __WEBPACK_IMPORTED_MODULE_3_next_router___default.a.push('/about');
+    }
+  }, {
     key: "render",
     value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["a" /* AppBar */], {
-        positon: "static",
+      var classes = this.props.classes;
+      return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement("div", {
+        className: classes.root,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 19
+          lineNumber: 46
         }
-      }, __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["f" /* Toolbar */], {
+      }, __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["a" /* AppBar */], {
+        position: "static",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 20
+          lineNumber: 47
         }
-      }, __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["g" /* Typography */], {
-        className: this.props.classes.header,
+      }, __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["g" /* Toolbar */], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 21
+          lineNumber: 48
         }
-      }, "About Page"), __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["b" /* Button */], {
-        className: this.props.classes.menubutton,
+      }, __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["d" /* IconButton */], {
+        className: classes.menuButton,
+        color: "inherit",
+        "aria-label": "Menu",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 22
+          lineNumber: 49
         }
-      }, "TestButton1"), __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["b" /* Button */], {
-        className: this.props.classes.menubutton,
+      }), __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["h" /* Typography */], {
+        variant: "h6",
+        color: "inherit",
+        className: classes.grow,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 23
+          lineNumber: 51
         }
-      }, "TestButton2")));
+      }, this.props.name), __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["b" /* Button */], {
+        color: "inherit",
+        onClick: this.goHome,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 54
+        }
+      }, "Home"), __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["b" /* Button */], {
+        color: "inherit",
+        onClick: this.goAbout,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 55
+        }
+      }, "About"))));
     }
   }]);
 
   return dailyAppBar;
 }(__WEBPACK_IMPORTED_MODULE_2_react__["Component"]);
 
-/* unused harmony default export */ var _unused_webpack_default_export = (Object(__WEBPACK_IMPORTED_MODULE_1__material_ui_core_styles__["withStyles"])(styles)(dailyAppBar));
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1__material_ui_core_styles__["withStyles"])(styles)(dailyAppBar));
     (function (Component, route) {
       if(!Component) return
       if (false) return
@@ -44994,7 +45060,7 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 3:
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./pages/about.js");
@@ -45002,7 +45068,7 @@ module.exports = __webpack_require__("./pages/about.js");
 
 /***/ })
 
-},[3])
+},[5])
           return { page: comp.default }
         })
       ;

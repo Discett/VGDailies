@@ -6,9 +6,11 @@ import Router from 'next/router';
 import {weblinks} from './weblinks';
 import {Paper, Grid, Button, AppBar, TextField, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
+import DailyAppBar from './dailyAppBar'
 
 const styles = {
     root:{
+        backgroundImage: "url('/static/wavesBackground.jpg')",
         backgroundColor: 'gray',
         margin: 0,
         left: 0,
@@ -23,6 +25,7 @@ const styles = {
     },
     paperBackground: {
         backgroundColor: 'white',
+        opacity: '0.8',
         padding: 50,
     }
 }
@@ -117,11 +120,11 @@ class Login extends Component {
         return(
             <Grid container className={this.props.classes.root}>
                 <Grid container direction = 'column' alignItems='flex-start' justify='space-between'>
-                    <AppBar> {strings.LoginHeader} </AppBar>
+                    <DailyAppBar name={strings.LoginHeader}/>
                 </Grid>
 
                 <Grid
-                    container justify='center'alignItems='center'direction='column' position='static'style={{minHeight: '80vh'}} >
+                    container justify='center'alignItems='center'direction='column' position='static'style={{minHeight: '90vh'}} >
                     <Paper className={this.props.classes.paperBackground}>
                         <form onSubmit={this.handleSubmit}>
                             <Typography color='textSecondary'>{strings.EnterUserName}</Typography>

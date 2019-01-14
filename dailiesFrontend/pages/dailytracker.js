@@ -3,17 +3,26 @@ import axios from 'axios';
 import {credentials} from './credentials';
 import DailyDataBox from './dailydata';
 import Link from 'next/link';
+import DailyAppBar from './dailyAppBar.js';
+import {withStyles} from '@material-ui/core/styles';
 
+const styles = {
+        root:{
+            left: 0,
+            right: 0,
+            bottom: 0,
+            top: 0,
+            position: 'absolute',
+        },
+    }
 
 class DailyTrackerMainPage extends Component {
-
     render(){
+        const classes = this.props.classes;
         return(
-            <div>
+            <div className={classes.root}>
+                <DailyAppBar name='Daily Tracker'/>
                 <h1>This is the DailyTrackerMainPage</h1>
-                <Link href={`/`}>
-                    <a style={{ padding: 5 }}>Home</a>
-                </Link>
                 <DailyDataBox showAddButton={true}/>
             </div>
         );
@@ -21,4 +30,4 @@ class DailyTrackerMainPage extends Component {
 }
 
 
-export default DailyTrackerMainPage;
+export default withStyles(styles)(DailyTrackerMainPage);

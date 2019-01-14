@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -92,6 +92,146 @@ var credentialsContext = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createCon
 
 /***/ }),
 
+/***/ "./pages/dailyAppBar.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__material_ui_core__ = __webpack_require__("@material-ui/core");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__material_ui_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__material_ui_core_styles__ = __webpack_require__("@material-ui/core/styles");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__material_ui_core_styles___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__material_ui_core_styles__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_next_router__ = __webpack_require__("next/router");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_next_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_next_router__);
+var _jsxFileName = "C:\\Users\\Luong\\Desktop\\React\\daily-tracker\\dailiesFrontend\\pages\\dailyAppBar.js";
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+ //Whatever is passed in from the header check and provide links as followed
+
+var styles = {
+  root: {
+    width: '100%',
+    position: 'fixed'
+  },
+  grow: {
+    flexGrow: 1
+  },
+  header: {
+    padding: 0,
+    margin: 0,
+    color: 'white'
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20
+  }
+};
+
+var dailyAppBar =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(dailyAppBar, _Component);
+
+  function dailyAppBar(props) {
+    var _this;
+
+    _classCallCheck(this, dailyAppBar);
+
+    _this = _possibleConstructorReturn(this, (dailyAppBar.__proto__ || Object.getPrototypeOf(dailyAppBar)).call(this, props));
+    _this.goHome = _this.goHome.bind(_assertThisInitialized(_this));
+    _this.goAbout = _this.goAbout.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(dailyAppBar, [{
+    key: "goHome",
+    value: function goHome() {
+      __WEBPACK_IMPORTED_MODULE_3_next_router___default.a.push('/');
+    }
+  }, {
+    key: "goAbout",
+    value: function goAbout() {
+      __WEBPACK_IMPORTED_MODULE_3_next_router___default.a.push('/about');
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var classes = this.props.classes;
+      return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement("div", {
+        className: classes.root,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 46
+        }
+      }, __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["AppBar"], {
+        position: "static",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 47
+        }
+      }, __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["Toolbar"], {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 48
+        }
+      }, __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["IconButton"], {
+        className: classes.menuButton,
+        color: "inherit",
+        "aria-label": "Menu",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 49
+        }
+      }), __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["Typography"], {
+        variant: "h6",
+        color: "inherit",
+        className: classes.grow,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 51
+        }
+      }, this.props.name), __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["Button"], {
+        color: "inherit",
+        onClick: this.goHome,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 54
+        }
+      }, "Home"), __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0__material_ui_core__["Button"], {
+        color: "inherit",
+        onClick: this.goAbout,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 55
+        }
+      }, "About"))));
+    }
+  }]);
+
+  return dailyAppBar;
+}(__WEBPACK_IMPORTED_MODULE_2_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1__material_ui_core_styles__["withStyles"])(styles)(dailyAppBar));
+
+/***/ }),
+
 /***/ "./pages/login.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -111,6 +251,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__material_ui_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__material_ui_core_styles__ = __webpack_require__("@material-ui/core/styles");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__material_ui_core_styles___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__material_ui_core_styles__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__dailyAppBar__ = __webpack_require__("./pages/dailyAppBar.js");
 var _jsxFileName = "C:\\Users\\Luong\\Desktop\\React\\daily-tracker\\dailiesFrontend\\pages\\login.js";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -135,8 +276,10 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
+
 var styles = {
   root: {
+    backgroundImage: "url('/static/wavesBackground.jpg')",
     backgroundColor: 'gray',
     margin: 0,
     left: 0,
@@ -151,6 +294,7 @@ var styles = {
   },
   paperBackground: {
     backgroundColor: 'white',
+    opacity: '0.8',
     padding: 50
   }
   /*
@@ -233,7 +377,7 @@ function (_Component) {
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("credentialsContext", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 86
+          lineNumber: 89
         }
       }, __WEBPACK_IMPORTED_MODULE_2__credentials__["a" /* credentials */].user.username = this.state.userSubmittedUsername); //query database recieves a response of token or incorrect username/password
 
@@ -255,7 +399,7 @@ function (_Component) {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("credentialsContext", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 103
+              lineNumber: 106
             }
           }, __WEBPACK_IMPORTED_MODULE_2__credentials__["a" /* credentials */].user.token = response.data);
           __WEBPACK_IMPORTED_MODULE_4_next_router___default.a.push('/dailytracker');
@@ -273,7 +417,7 @@ function (_Component) {
         className: this.props.classes.root,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 118
+          lineNumber: 121
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Grid"], {
         container: true,
@@ -282,43 +426,44 @@ function (_Component) {
         justify: "space-between",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 119
+          lineNumber: 122
         }
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["AppBar"], {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__dailyAppBar__["a" /* default */], {
+        name: strings.LoginHeader,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 120
+          lineNumber: 123
         }
-      }, " ", strings.LoginHeader, " ")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Grid"], {
+      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Grid"], {
         container: true,
         justify: "center",
         alignItems: "center",
         direction: "column",
         position: "static",
         style: {
-          minHeight: '80vh'
+          minHeight: '90vh'
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 123
+          lineNumber: 126
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Paper"], {
         className: this.props.classes.paperBackground,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 125
+          lineNumber: 128
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("form", {
         onSubmit: this.handleSubmit,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 126
+          lineNumber: 129
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Typography"], {
         color: "textSecondary",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 127
+          lineNumber: 130
         }
       }, strings.EnterUserName), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["TextField"], {
         name: "username",
@@ -326,13 +471,13 @@ function (_Component) {
         label: strings.Username,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 128
+          lineNumber: 131
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Typography"], {
         color: "textSecondary",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 129
+          lineNumber: 132
         }
       }, strings.EnterPassword), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["TextField"], {
         name: "password",
@@ -340,7 +485,7 @@ function (_Component) {
         onChange: this.handleChangePassword,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 130
+          lineNumber: 133
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__material_ui_core__["Button"], {
         type: "submit",
@@ -349,7 +494,7 @@ function (_Component) {
         size: "large",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 131
+          lineNumber: 134
         }
       }, strings.Submit)))));
     }
@@ -385,7 +530,7 @@ var weblinksContext = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createContex
 
 /***/ }),
 
-/***/ 5:
+/***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./pages/login.js");
