@@ -246,6 +246,10 @@ function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__weblinks__ = __webpack_require__("./pages/weblinks.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios__ = __webpack_require__("axios");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__material_ui_core_styles__ = __webpack_require__("@material-ui/core/styles");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__material_ui_core_styles___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__material_ui_core_styles__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__material_ui_core___ = __webpack_require__("@material-ui/core/");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__material_ui_core____default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___);
 var _jsxFileName = "C:\\Users\\Luong\\Desktop\\React\\daily-tracker\\dailiesFrontend\\pages\\dailydata.js";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -268,6 +272,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
+
+
  //import dailydatastyles from './styles/dailydatastyles.css'
 //DailyData: will contain the data for the user's dailies
 //contains view that will load the information
@@ -275,23 +281,42 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 //TODO: eventually implement daylight savings
 //TODO: switch statement per game since JSON's per game is case by case
 //TODO: specific games would need their own class to display data in DailyDataBox
-//TODO: add didReset to frontend
 //TODO: reroute back to login when refreshed
+//TODO: UI can still add duplicates when adding daily. Server is does not
 
-var customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
+var styles = {
+  root: {
+    position: 'absolute'
+  },
+  modalWindow: {
     height: '500px',
-    overflow: 'auto'
-  }
-}; //Modal.setAppElement(el)
-//needs to display that and handle delete button
-//needs more css to move button to the right
+    width: '500px',
+    margin: 'auto',
+    overflow: 'auto',
+    position: 'absolute',
+    top: '10vh',
+    left: '50vh',
+    right: '50vh',
+    borderStyle: 'solid',
+    borderWidth: '5px',
+    borderColor: '#3f51b5',
+    backgroundColor: 'white'
+  },
+  closeButton: {
+    color: 'black',
+    fontWeight: 'bold',
+    float: 'right'
+  },
+  modalFooter: {
+    paddingBottom: 50
+  },
+  submitButton: {
+    marginTop: 10
+  } //Modal.setAppElement(el)
+  //needs to display that and handle delete button
+  //needs more css to move button to the right
+
+};
 
 var ModalRow =
 /*#__PURE__*/
@@ -332,25 +357,37 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var classes = this.props.classes;
       var data = this.props.data;
       var title = data.title;
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 71
+          lineNumber: 92
         }
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["Grid"], {
+        container: true,
+        direction: "row",
+        justify: "space-between",
+        alignItems: "center",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 72
+          lineNumber: 93
         }
-      }, title), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["Typography"], {
+        variant: "subtitle1",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 99
+        }
+      }, title), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["Button"], {
+        size: "small",
         onClick: this.handleRemove,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 73
+          lineNumber: 100
         }
-      }, "remove"));
+      }, "remove")));
     }
   }]);
 
@@ -397,22 +434,24 @@ function (_Component2) {
     value: function render() {
       var _this3 = this;
 
+      var classes = this.props.classes;
       var display = [];
       this.state.rows.forEach(function (row) {
         display.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ModalRow, {
           data: row.fields,
           key: row.fields.title,
           updateRemove: _this3.props.updateRemove,
+          classes: classes,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 90
+            lineNumber: 119
           }
         }));
       });
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 93
+          lineNumber: 122
         }
       }, display);
     }
@@ -486,38 +525,45 @@ function (_Component3) {
       console.log(this.props.data); //this needs to also check if the reset is yesterday
 
       if (this.props.data.reset == null || this.hasDailyReset()) {
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["Button"], {
+          variant: "outlined",
           onClick: this.setFinishDaily,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 150
+            lineNumber: 179
           }
-        }, "null");
+        }, "not complete");
       }
 
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["Button"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 152
+          lineNumber: 181
         }
-      }, "test");
+      }, "Completed");
     }
   }, {
     key: "render",
     value: function render() {
       var data = this.props.data;
       var title = data.title;
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["TableRow"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 159
+          lineNumber: 188
         }
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["TableCell"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 160
+          lineNumber: 189
         }
-      }, title), this.showFinishDaily());
+      }, title), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["TableCell"], {
+        align: "right",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 190
+        }
+      }, this.showFinishDaily()));
     }
   }]);
 
@@ -616,15 +662,17 @@ function (_Component4) {
     value: function render() {
       var _this6 = this;
 
+      var classes = this.props.classes;
       var button;
 
       if (this.props.showAddButton) {
-        button = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
+        button = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["Button"], {
           type: "button",
           onClick: this.openModal,
+          variant: "contained",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 233
+            lineNumber: 263
           }
         }, "Click to edit dailies");
       }
@@ -632,79 +680,108 @@ function (_Component4) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 236
+          lineNumber: 266
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 237
+          lineNumber: 267
         }
       }, button), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_modal___default.a, {
         isOpen: this.state.modalIsOpen,
         onAfterOpen: this.state.afterOpenModal,
         onRequestClose: this.closeModal,
-        style: customStyles,
+        className: classes.modalWindow,
         contentLabel: "Modify daily menu",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 238
+          lineNumber: 268
         }
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h2", {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["Button"], {
+        color: "inherit",
+        size: "small",
+        variant: "flat",
+        onClick: this.closeModal,
+        className: classes.closeButton,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 275
+        }
+      }, "Close"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["Grid"], {
+        container: true,
+        direction: "column",
+        justify: "center",
+        alignItems: "center",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 278
+        }
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["Typography"], {
+        variant: "h3",
         ref: function ref(subtitle) {
           return _this6.subtitle = subtitle;
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 245
+          lineNumber: 284
         }
-      }, "Add Game Daily"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
-        onClick: this.closeModal,
+      }, "Add Game Daily"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["Typography"], {
+        variant: "caption",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 246
+          lineNumber: 285
         }
-      }, "close"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+      }, "Please input daily name and time of reset"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["Grid"], {
+        container: true,
+        direction: "row",
+        justify: "center",
+        alignItems: "center",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 247
+          lineNumber: 286
         }
-      }, "Please input daily name and time of reset"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["Input"], {
         type: "text",
         name: "title",
         onChange: this.handleTitleChange,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 248
+          lineNumber: 292
         }
-      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["Input"], {
         type: "time",
         name: "time",
         onChange: this.handleTimeChange,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 249
+          lineNumber: 293
         }
-      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["Button"], {
+        variant: "contained",
+        color: "inherit",
+        className: classes.submitButton,
+        size: "small",
         type: "submit",
-        value: "submit",
         onClick: this.handleSubmit,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 250
+          lineNumber: 295
         }
-      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+      }, "Submit"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        className: classes.modalFooter,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 251
+          lineNumber: 300
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ModalContainer, {
         data: this.props.data,
         updateRemove: this.props.updateRemove,
+        classes: classes,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 252
+          lineNumber: 301
         }
-      }))));
+      })))));
     }
   }]);
 
@@ -741,40 +818,41 @@ function (_Component5) {
           updateTime: _this7.props.updateTime,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 271
+            lineNumber: 321
           }
         }));
         console.log(data.fields.title);
       });
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["Table"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 276
+          lineNumber: 326
         }
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("thread", {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["TableHead"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 277
+          lineNumber: 327
         }
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["TableRow"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 278
+          lineNumber: 328
         }
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["TableCell"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 279
+          lineNumber: 329
         }
-      }, "Title"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+      }, "Title"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["TableCell"], {
+        align: "right",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 280
+          lineNumber: 330
         }
-      }, "Is completed"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tbody", {
+      }, "Completed"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__material_ui_core___["TableBody"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 283
+          lineNumber: 333
         }
       }, rows));
     }
@@ -898,23 +976,24 @@ function (_Component6) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 367
+          lineNumber: 420
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(DailyInformation, {
         data: this.state.dailyData,
         updateTime: this.updateTime,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 368
+          lineNumber: 421
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(AddDailyInformation, {
         showAddButton: this.props.showAddButton,
         data: this.state.dailyData,
         updateRemove: this.updateRemove,
         updateAdd: this.updateAdd,
+        classes: this.props.classes,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 369
+          lineNumber: 422
         }
       }));
     }
@@ -923,7 +1002,7 @@ function (_Component6) {
   return DailyDataBox;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["a"] = (DailyDataBox);
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_6__material_ui_core_styles__["withStyles"])(styles)(DailyDataBox));
 
 /***/ }),
 
@@ -1060,6 +1139,13 @@ module.exports = __webpack_require__("./pages/dailytracker.js");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core");
+
+/***/ }),
+
+/***/ "@material-ui/core/":
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/");
 
 /***/ }),
 

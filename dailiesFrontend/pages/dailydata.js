@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import {weblinks} from './weblinks';
 import axios from 'axios';
+import {withStyles} from '@material-ui/core/styles'
+import {Dialog,Typography,Grid,Button,Input,Paper,Table,TableRow,TableCell,TableHead,TableBody} from '@material-ui/core/';
 
 //import dailydatastyles from './styles/dailydatastyles.css'
 
@@ -16,20 +18,38 @@ import axios from 'axios';
 //TODO: switch statement per game since JSON's per game is case by case
 //TODO: specific games would need their own class to display data in DailyDataBox
 
-//TODO: add didReset to frontend
 //TODO: reroute back to login when refreshed
-const customStyles = {
-    content : {
-        top                   : '50%',
-        left                  : '50%',
-        right                 : 'auto',
-        bottom                : 'auto',
-        marginRight           : '-50%',
-        transform             : 'translate(-50%, -50%)',
-        height                : '500px',
-        overflow              : 'auto'
-      }
-};
+//TODO: UI can still add duplicates when adding daily. Server is does not
+const styles = {
+    root: {
+        position: 'absolute',
+    },
+    modalWindow: {
+        height:'500px',
+        width: '500px',
+        margin: 'auto',
+        overflow: 'auto',
+        position: 'absolute',
+        top: '10vh',
+        left: '50vh',
+        right: '50vh',
+        borderStyle: 'solid',
+        borderWidth: '5px',
+        borderColor: '#3f51b5',
+        backgroundColor: 'white',
+    },
+    closeButton: {
+        color: 'black',
+        fontWeight: 'bold',
+        float:'right',
+    },
+    modalFooter:{
+        paddingBottom: 50,
+    },
+    submitButton:{
+        marginTop: 10,
+    },
+}
 
 //Modal.setAppElement(el)
 
@@ -65,12 +85,20 @@ class ModalRow extends Component {
     }
 
     render(){
+        const classes = this.props.classes;
         const data = this.props.data;
         const title = data.title;
         return(
             <div>
-                <h1>{title}</h1>
-                <button onClick={this.handleRemove}>remove</button>
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-between"
+                    alignItems="center"
+                >
+                    <Typography variant='subtitle1'>{title}</Typography>
+                    <Button size='small' onClick={this.handleRemove}>remove</Button>
+                </Grid>
             </div>
         );
     }
@@ -85,9 +113,10 @@ class ModalContainer extends Component {
         this.setState({rows:this.props.data});
     }
     render(){
+        const classes = this.props.classes;
         const display = [];
         this.state.rows.forEach((row)=>{
-            display.push(<ModalRow data={row.fields} key={row.fields.title} updateRemove={this.props.updateRemove}/>);
+            display.push(<ModalRow data={row.fields} key={row.fields.title} updateRemove={this.props.updateRemove} classes={classes}/>);
         });
         return(
             <div>{display}</div>
@@ -147,19 +176,19 @@ class DailyRow extends Component{
         console.log(this.props.data);
         //this needs to also check if the reset is yesterday
         if(this.props.data.reset == null || this.hasDailyReset()){
-            return <button onClick={this.setFinishDaily}>null</button>
+            return <Button variant="outlined"onClick={this.setFinishDaily}>not complete</Button>
         }
-        return <button>test</button>
+        return <Button>Completed</Button>
     }
     render(){
         const data = this.props.data;
         const title = data.title;
 
         return(
-            <tr>
-                <td>{title}</td>
-                {this.showFinishDaily()}
-            </tr>
+            <TableRow>
+                <TableCell>{title}</TableCell>
+                <TableCell align="right">{this.showFinishDaily()}</TableCell>
+            </TableRow>
         );
     }
 }
@@ -228,9 +257,10 @@ class AddDailyInformation extends Component {
         this.closeModal();
     }
     render(){
+        const classes = this.props.classes;
         let button;
         if(this.props.showAddButton){
-            button = <button type="button" onClick={this.openModal}>Click to edit dailies</button>;
+            button = <Button type="button" onClick={this.openModal} variant='contained'>Click to edit dailies</Button>;
         }
         return(
             <div>
@@ -239,18 +269,38 @@ class AddDailyInformation extends Component {
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.state.afterOpenModal}
                     onRequestClose={this.closeModal}
-                    style={customStyles}
+                    className={classes.modalWindow}
                     contentLabel="Modify daily menu"
                 >
-                    <h2 ref={subtitle => this.subtitle = subtitle}>Add Game Daily</h2>
-                      <button onClick={this.closeModal}>close</button>
-                      <div>Please input daily name and time of reset</div>
-                        <input type='text' name='title' onChange={this.handleTitleChange}/>
-                        <input type="time" name='time'onChange={this.handleTimeChange}/>
-                        <input type='submit' value='submit' onClick={this.handleSubmit}/>
-                      <div>
-                        <ModalContainer data={this.props.data} updateRemove={this.props.updateRemove}/>
+                    <Button color='inherit'size='small'
+                    variant='flat' onClick={this.closeModal}
+                    className={classes.closeButton}>Close</Button>
+                    <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                    >
+                        <Typography variant='h3' ref={subtitle => this.subtitle = subtitle}>Add Game Daily</Typography>
+                        <Typography variant='caption'>Please input daily name and time of reset</Typography>
+                        <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="center"
+                        >
+                            <Input type='text' name='title'onChange={this.handleTitleChange}/>
+                            <Input type="time" name='time'onChange={this.handleTimeChange}/>
+                        </Grid>
+                        <Button variant='contained'color='inherit'
+                        className={classes.submitButton} size='small'
+                        type='submit'onClick={this.handleSubmit}>
+                        Submit
+                        </Button>
+                      <div className={classes.modalFooter}>
+                        <ModalContainer data={this.props.data} updateRemove={this.props.updateRemove} classes={classes}/>
                       </div>
+                  </Grid>
                 </Modal>
             </div>
         );
@@ -273,15 +323,18 @@ class DailyInformation extends Component {
             console.log(data.fields.title);
         })
         return(
-            <table>
-                <thread>
-                    <tr>
-                        <th>Title</th>
-                        <th>Is completed</th>
-                    </tr>
-                </thread>
-                <tbody>{rows}</tbody>
-            </table>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Title</TableCell>
+                        <TableCell align="right">Completed</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {rows}
+                </TableBody>
+            </Table>
+
         );
     }
 }
@@ -366,10 +419,11 @@ class DailyDataBox extends Component {
         return(
             <div>
                 <DailyInformation data={this.state.dailyData} updateTime={this.updateTime}/>
-                <AddDailyInformation showAddButton={this.props.showAddButton} data={this.state.dailyData} updateRemove={this.updateRemove} updateAdd={this.updateAdd}/>
+                <AddDailyInformation showAddButton={this.props.showAddButton} data={this.state.dailyData}
+                 updateRemove={this.updateRemove} updateAdd={this.updateAdd} classes={this.props.classes}/>
             </div>
         );
     }
 }
 
-export default DailyDataBox;
+export default withStyles(styles)(DailyDataBox);
