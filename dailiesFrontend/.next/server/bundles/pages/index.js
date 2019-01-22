@@ -161,6 +161,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (Index.__proto__ || Object.getPrototypeOf(Index)).call(this, props));
     _this.goLogin = _this.goLogin.bind(_assertThisInitialized(_this));
     _this.goAbout = _this.goAbout.bind(_assertThisInitialized(_this));
+    _this.goTracker = _this.goTracker.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -175,16 +176,33 @@ function (_Component) {
       __WEBPACK_IMPORTED_MODULE_4_next_router___default.a.push('/about');
     }
   }, {
+    key: "goTracker",
+    value: function goTracker() {
+      __WEBPACK_IMPORTED_MODULE_4_next_router___default.a.push('/dailytracker');
+    }
+  }, {
     key: "render",
     value: function render() {
       console.log("token");
       console.log(__WEBPACK_IMPORTED_MODULE_2__credentials__["a" /* credentials */].user.token);
       var classes = this.props.classes;
+      var button;
+
+      if (__WEBPACK_IMPORTED_MODULE_2__credentials__["a" /* credentials */].user.token != '') {
+        button = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__material_ui_core__["Button"], {
+          onClick: this.goTracker,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 48
+          }
+        }, "Tracker");
+      }
+
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         className: classes.root,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 43
+          lineNumber: 51
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__material_ui_core__["Grid"], {
         container: true,
@@ -194,14 +212,14 @@ function (_Component) {
         className: classes.header,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 44
+          lineNumber: 52
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__material_ui_core__["Typography"], {
         variant: "h1",
         align: "center",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 51
+          lineNumber: 59
         }
       }, "Welcome to Daily Tracker"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__material_ui_core__["Grid"], {
         container: true,
@@ -210,35 +228,26 @@ function (_Component) {
         alignItems: "center",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 52
+          lineNumber: 60
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__material_ui_core__["Button"], {
         onClick: this.goLogin,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 58
+          lineNumber: 66
         }
-      }, "Login"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__material_ui_core__["Button"], {
+      }, "Login"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 67
+        }
+      }, button), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__material_ui_core__["Button"], {
         onClick: this.goAbout,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 59
+          lineNumber: 68
         }
-      }, "About Page"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_next_link___default.a, {
-        href: "/dailytracker",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 62
-        }
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
-        style: {
-          padding: 5
-        },
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 63
-        }
-      }, "Test Daily Tracker")));
+      }, "About Page"))));
     }
   }]);
 

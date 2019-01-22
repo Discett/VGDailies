@@ -26,8 +26,9 @@ const styles = {
 class Index extends Component {
     constructor(props){
         super(props);
-        this.goLogin = this.goLogin.bind(this);
-        this.goAbout = this.goAbout.bind(this);
+        this.goLogin   = this.goLogin.bind(this);
+        this.goAbout   = this.goAbout.bind(this);
+        this.goTracker = this.goTracker.bind(this);
     }
     goLogin(){
         Router.push('/login');
@@ -35,10 +36,17 @@ class Index extends Component {
     goAbout(){
         Router.push('/about');
     }
+    goTracker(){
+        Router.push('/dailytracker');
+    }
     render(){
         console.log("token");
         console.log(credentials.user.token);
         const classes = this.props.classes;
+        let button;
+        if(credentials.user.token != ''){
+            button = <Button onClick={this.goTracker}>Tracker</Button>;
+        }
         return(
             <div className={classes.root}>
             <Grid
@@ -56,12 +64,10 @@ class Index extends Component {
                   alignItems="center"
                 >
                 <Button onClick={this.goLogin}>Login</Button>
+                <div>{button}</div>
                 <Button onClick={this.goAbout}>About Page</Button>
                 </Grid>
             </Grid>
-                <Link href={`/dailytracker`}>
-                    <a style={{ padding: 5 }}>Test Daily Tracker</a>
-                </Link>
             </div>
         )
     }

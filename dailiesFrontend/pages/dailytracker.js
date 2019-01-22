@@ -5,6 +5,7 @@ import DailyDataBox from './dailydata';
 import Link from 'next/link';
 import DailyAppBar from './dailyAppBar.js';
 import {withStyles} from '@material-ui/core/styles';
+import Router from 'next/router';
 
 const styles = {
         root:{
@@ -19,13 +20,21 @@ const styles = {
 class DailyTrackerMainPage extends Component {
     render(){
         const classes = this.props.classes;
-        return(
-            <div className={classes.root}>
-                <DailyAppBar name='Daily Tracker'/>
-                <h1>This is the DailyTrackerMainPage</h1>
-                <DailyDataBox showAddButton={true}/>
-            </div>
-        );
+        if(credentials.user.token == ''){
+            return(
+                <div className={classes.root}>
+                    <DailyAppBar name='Page error please login'/>
+                </div>
+            );
+        } else {
+            return(
+                <div className={classes.root}>
+                    <DailyAppBar name='Daily Tracker'/>
+                    <h1>This is the DailyTrackerMainPage</h1>
+                    <DailyDataBox showAddButton={true}/>
+                </div>
+            );
+        }
     }
 }
 
